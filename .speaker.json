@@ -1,0 +1,11 @@
+{
+    "directoryName": "bazel-bazel-bazel",
+    "projectName": "bazel-bazel-bazel",
+    "projectDescription": "bazel-bazel-bazel",
+    "projectAuthorsTwitter": "@AurelienLoyer @EmmanuelDemey",
+    "types": [
+        "slides"
+    ],
+    "deploy-target": "",
+    "gitinit": true
+}
