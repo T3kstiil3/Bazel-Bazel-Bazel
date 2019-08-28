@@ -30,7 +30,18 @@ Conçu et pensé pour être adopté de manière incrémentale.
 
 === Aurélien LOYER
 
-include::chapters/introduction.adoc[]
-include::chapters/andmore.adoc[]
+== Bazel
+
+// TODO mettre la définition
+
+== Le projet
+
+// TODO mettre un schéma du projet à migrer
+
+== Terminologie
+
+== Conclusion
+
+// TODO parler de qui utilisent Bazel
 
  

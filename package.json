@@ -16,6 +16,5 @@
 	"devDependencies": {
 		"speaker-cli": "git+https://github.com/DX-DeveloperExperience/speaker-cli.git"
 	},
-	"dependencies": {
-	}
+	"dependencies": {}
 }
