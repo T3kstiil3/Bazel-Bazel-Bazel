@@ -5,7 +5,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "bzl-angular": {
+    "bazel-angular": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -15,7 +15,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/bzl-angular",
+            "outputPath": "dist/bazel-angular",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -65,18 +65,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "bzl-angular:build"
+            "browserTarget": "bazel-angular:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "bzl-angular:build:production"
+              "browserTarget": "bazel-angular:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "bzl-angular:build"
+            "browserTarget": "bazel-angular:build"
           }
         },
         "test": {
@@ -113,15 +113,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "bzl-angular:serve"
+            "devServerTarget": "bazel-angular:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "bzl-angular:serve:production"
+              "devServerTarget": "bazel-angular:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "bzl-angular"
+  "defaultProject": "bazel-angular"
 }
