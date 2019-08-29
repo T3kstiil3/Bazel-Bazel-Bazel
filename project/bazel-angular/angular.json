@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "bzl-angular": {
+    "bazel-angular": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -38,7 +38,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "bzl-angular:build"
+            "browserTarget": "bazel-angular:build"
           }
         },
         "test": {
@@ -75,5 +75,5 @@
         }
       }
     }},
-  "defaultProject": "bzl-angular"
+  "defaultProject": "bazel-angular"
 }

@@ -16,16 +16,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'bzl-angular'`, () => {
+  it(`should have as title 'bazel-angular'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('bzl-angular');
+    expect(app.title).toEqual('bazel-angular');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('bzl-angular app is running!');
+    expect(compiled.querySelector('.content span').textContent).toContain('bazel-angular app is running!');
   });
 });
