@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "build:bazel": "bazel build //src:backend",
-    "serve:bazel": "bazel build //src:server",
+    "serve:bazel": "ibazel run //src:server",
     "build": "rimraf dist && tsc -p tsconfig.build.json",
     "format": "prettier --write \"src/**/*.ts\"",
     "start": "ts-node -r tsconfig-paths/register src/main.ts",

@@ -14,6 +14,8 @@ ifndef::imagesdir[:imagesdir: images]
 :title-slide-transition-speed: fast
 :icons: font
 
+// TODO slide noire pour expliquer le use case du problème d'un projet qui prend du temps à builder
+
 = Vue.js
 
 image::./../../img/logo.png[Logo,200]
@@ -33,15 +35,13 @@ Conçu et pensé pour être adopté de manière incrémentale.
 == Bazel
 
 // TODO mettre la définition
-
-== Le projet
-
+// TODO mettre la terminologie : Workspace, Build, Package, bzl file, action, skylark
+// TODO faire un exemple très basic avec une règle general
+// TODO Présenter la syntaxe de maniére général
 // TODO mettre un schéma du projet à migrer
-
-== Terminologie
-
-== Conclusion
-
-// TODO parler de qui utilisent Bazel
+// TODO migrer le back
+// TODO migrer le front
+// TODO Builder en remote 
+// TODO conclusion
 
  

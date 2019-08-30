@@ -14,3 +14,14 @@ ts_library(
         "@npm//@nestjs"
     ],
 )
+load("@build_bazel_rules_nodejs//:defs.bzl", "nodejs_binary")
+
+nodejs_binary(
+    name = "server",
+    data = [
+        ":backend",
+        "@npm//:node_modules",
+
+    ],
+    entry_point = ":main.ts",
+)
