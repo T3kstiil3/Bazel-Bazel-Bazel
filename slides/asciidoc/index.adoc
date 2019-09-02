@@ -27,9 +27,33 @@ TODO:
 
 image::bazel.png[]
 
-=== Emmanuel DEMEY
+[.speaker]
+=== !
 
-=== Aurélien LOYER
+[id="speaker-bio"]
+--
+Emmanuel DEMEY
+
+Developer Advocate à Zenika Lille 
+
+@EmmanuelDemey
+--
+
+image::emmanuel.jpg[]
+
+[.speaker]
+=== !
+
+[id="speaker-bio"]
+--
+Aurélien LOYER
+
+Consultant à Zenika Lille 
+
+@AurelienDemey
+--
+
+image::aurelien.jpeg[]
 
 == !
 
