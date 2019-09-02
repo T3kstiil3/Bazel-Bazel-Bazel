@@ -1,4 +1,4 @@
-:revealjsdir: https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0
+:revealjsdir: https://cdn.rawgit.com/hakimel/reveal.js/3.8.0/
 :revnumber: {project-version}
 :example-caption!:
 ifndef::imagesdir[:imagesdir: images]
@@ -9,39 +9,123 @@ ifndef::imagesdir[:imagesdir: images]
 :status:
 :slideNumber: true
 :showSlideNumber: true
-:title-slide-background-image: ./../../img/bg.jpeg
 :title-slide-transition: zoom
 :title-slide-transition-speed: fast
 :icons: font
+:revealjs_history: true
 
-// TODO slide noire pour expliquer le use case du problème d'un projet qui prend du temps à builder
+[.black.background]
+== !
 
-= Vue.js
+[.notes]
+--
+TODO: 
+- Parler des problèmes rencontrés dans les solutions utilisées actuellement
+--
 
-image::./../../img/logo.png[Logo,200]
+== !
 
-👨🏻‍💻 🌲 Hack in the wood 2019
- +
- +
-Le framework évolutif pour construire des interfaces utilisateur rapidement. +
-Conçu et pensé pour être adopté de manière incrémentale.
-
-== Qui sommes nous ?
+image::bazel.png[]
 
 === Emmanuel DEMEY
 
 === Aurélien LOYER
 
-== Bazel
+== !
 
-// TODO mettre la définition
-// TODO mettre la terminologie : Workspace, Build, Package, bzl file, action, skylark
-// TODO faire un exemple très basic avec une règle general
-// TODO Présenter la syntaxe de maniére général
-// TODO mettre un schéma du projet à migrer
-// TODO migrer le back
-// TODO migrer le front
-// TODO Builder en remote 
-// TODO conclusion
+NOTE: This presentation is dangerous!
 
- 
+[.notes]
+--
+TODO: 
+- Mettre la définition de Bazel 
+--
+
+== Terminologie
+
+[.notes]
+--
+TODO: 
+- Workspace, Build, Package, bzl file, action, skylark
+--
+
+== Getting Started
+
+[.notes]
+--
+TODO: 
+- Installation / CLI
+--
+
+== Getting Started
+
+[.notes]
+--
+TODO: 
+- Ajouter un screenshot avec un fichier WORKSPACE et un fichier BUILD
+--
+
+== Getting started
+
+[.notes]
+--
+TODO: 
+- MEttre le snippet du genrule
+--
+
+== Getting started
+
+[.notes]
+--
+TODO: 
+- Flow d'actions avec deux gen_rules
+--
+
+== Getting started
+
+[.notes]
+--
+TODO: 
+- Demo
+- Creation d'une regle custom 
+--
+
+== Custom rules
+
+[.notes]
+--
+TODO: 
+- Mettre le code de la regle BZL ici 
+--
+
+== Telechargement d'une regle
+
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
+http_archive(
+    name = "build_bazel_rules_nodejs",
+    sha256 = "6d4edbf28ff6720aedf5f97f9b9a7679401bf7fca9d14a0fff80f644a99992b4",
+    urls = ["https://github.com/bazelbuild/rules_nodejs/releases/download/0.32.2/rules_nodejs-0.32.2.tar.gz"],
+)
+
+[.notes]
+--
+TODO: 
+--
+
+== Demo
+
+[.notes]
+--
+TODO: 
+--
+
+== Conclusion
+
+[.notes]
+--
+TODO: 
+- Ajouter un diff GIT pour montrer les fichiers ajoutés
+- Support dans Angular CLI 
+- Builder en remote avec plus core 
+--
