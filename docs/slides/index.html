@@ -19,16 +19,26 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );</script><!--[if 
 <link rel="stylesheet" type="text/css" href="./theme/main.css" />
 <link rel="stylesheet" type="text/css" href="./fonts/EBGaramond.css" rel="stylesheet" />
 
-<script src="./theme/asciinema-player.js"></script></head><body><div class="reveal"><div class="slides"><section class="black background"><aside class="notes"><div class="paragraph"><p>TODO:
-- Parler des problèmes rencontrés dans les solutions utilisées actuellement</p></div></aside></section>
-<section><section><div class="imageblock" style=""><img src="images/bazel.png" alt="bazel"></div></section><section class="speaker"><div class="openblock" id="speaker-bio"><div class="content"><div class="paragraph"><p>Emmanuel DEMEY</p></div>
+<script src="./theme/asciinema-player.js"></script></head><body><div class="reveal"><div class="slides"><section class="black background"><aside class="notes"><div class="paragraph"><p>Aujourd&#8217;hui nous allons parler de Build System. Pour mettre tout le monde au clair, qu&#8217;est-ce que c&#8217;est un build system.
+C&#8217;est une toolchain qui à partir d&#8217;inputs va executer certaines commandes les unes à la suite des autres afin de créer vos
+livrables. Durant cette toolchain, nous n&#8217;avons bien evidemment pas que la tache de creation du livrable, nous avons en plus
+de cela pdes taches permettant de tester notre code, vérifier la qualité, &#8230;&#8203;</p></div>
+<div class="paragraph"><p>TODO:
+- Parler des problèmes rencontrés dans les solutions utilisées actuellement
+- gestion de dependencaes</p></div></aside></section>
+<section><div class="imageblock" style=""><img src="images/google_codebase.png" alt="google codebase"></div>
+<aside class="notes"><div class="paragraph"><p>Avec toutes ces limitations et toutes ces problèmatiques, imaginez deux minutes votre journée de travail chez Google donc la codebase est dans un et un seul gti giant mono repo. Imaginez vous à Mountain View pendans deux minutes.
+Vous vous dites que cette taille de repo n&#8217;est surement pas pour vous, en effet. Nous ne sommes pas Google. Mais nous trouvons tout de meme interessant de regarder les outils utilisés par Google.</p></div></aside></section>
+<section id="_google"><h2>Google</h2><div class="ulist column"><ul><li><p>Piper</p></li><li><p>CiTC</p></li><li><p>Critique</p></li><li><p>Codesearch</p></li></ul></div>
+<div class="ulist column"><ul><li><p>Tricorder</p></li><li><p>Presubmit</p></li><li><p>TAP</p></li><li><p>Rosie</p></li></ul></div></section>
+<section><section><div class="imageblock" style=""><img src="images/bazel.png" alt="bazel"></div><aside class="notes"><div class="paragraph"><p>OSS. Utilisé depuis 10 ans chez Google</p></div></aside></section><section class="speaker"><div class="openblock" id="speaker-bio"><div class="content"><div class="paragraph"><p>Emmanuel DEMEY</p></div>
 <div class="paragraph"><p>Developer Advocate à Zenika Lille</p></div>
 <div class="paragraph"><p>@EmmanuelDemey</p></div></div></div>
 <div class="imageblock" style=""><img src="images/emmanuel.jpg" alt="emmanuel"></div></section><section class="speaker"><div class="openblock" id="speaker-bio"><div class="content"><div class="paragraph"><p>Aurélien LOYER</p></div>
 <div class="paragraph"><p>Consultant à Zenika Lille</p></div>
 <div class="paragraph"><p>@AurelienDemey</p></div></div></div>
 <div class="imageblock" style=""><img src="images/aurelien.jpeg" alt="aurelien"></div></section></section>
-<section><div class="admonitionblock note"><table><tr><td class="icon"><i class="fa fa-info-circle" title="Note"></i></td><td class="content">This presentation is dangerous!</td></tr></table></div>
+<section><div class="admonitionblock note"><table><tr><td class="icon"><i class="fa fa-info-circle" title="Note"></i></td><td class="content">Build and test software of any size, quickly and reliably.</td></tr></table></div>
 <aside class="notes"><div class="paragraph"><p>TODO:
 - Mettre la définition de Bazel</p></div></aside></section>
 <section id="_terminologie"><h2>Terminologie</h2><aside class="notes"><div class="paragraph"><p>TODO:

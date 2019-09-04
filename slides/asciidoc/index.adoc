@@ -19,13 +19,49 @@ ifndef::imagesdir[:imagesdir: images]
 
 [.notes]
 --
+Aujourd'hui nous allons parler de Build System. Pour mettre tout le monde au clair, qu'est-ce que c'est un build system. 
+C'est une toolchain qui à partir d'inputs va executer certaines commandes les unes à la suite des autres afin de créer vos 
+livrables. Durant cette toolchain, nous n'avons bien evidemment pas que la tache de creation du livrable, nous avons en plus 
+de cela pdes taches permettant de tester notre code, vérifier la qualité, ...
+
 TODO: 
 - Parler des problèmes rencontrés dans les solutions utilisées actuellement
+- gestion de dependencaes
 --
 
 == !
 
+image::google_codebase.png[]
+
+[.notes]
+--
+Avec toutes ces limitations et toutes ces problèmatiques, imaginez deux minutes votre journée de travail chez Google donc la codebase est dans un et un seul gti giant mono repo. Imaginez vous à Mountain View pendans deux minutes. 
+Vous vous dites que cette taille de repo n'est surement pas pour vous, en effet. Nous ne sommes pas Google. Mais nous trouvons tout de meme interessant de regarder les outils utilisés par Google. 
+--
+
+
+== Google
+
+[.column]
+* Piper
+* CiTC
+* Critique
+* Codesearch
+
+[.column]
+* Tricorder
+* Presubmit
+* TAP
+* Rosie
+
+== !
+
 image::bazel.png[]
+
+[.notes]
+--
+OSS. Utilisé depuis 10 ans chez Google
+--
 
 [.speaker]
 === !
@@ -57,7 +93,7 @@ image::aurelien.jpeg[]
 
 == !
 
-NOTE: This presentation is dangerous!
+NOTE: Build and test software of any size, quickly and reliably.
 
 [.notes]
 --

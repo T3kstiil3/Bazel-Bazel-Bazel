@@ -647,3 +647,12 @@ div.black.background {
   border-radius: 50%;
   width: 50%;
 }
+
+.column {
+  display: inline-block;
+}
+
+.column ul {
+  list-style: none;
+  float: left;
+}

@@ -3,8 +3,9 @@ def _convert_to_uppercase_impl(ctx):
     in_file = ctx.file.input
     out_file = ctx.outputs.output
     ctx.actions.run_shell(
-        outputs = [out_file],
         inputs = [in_file],
+
+        outputs = [out_file],
         arguments = [in_file.path, out_file.path],
         command = "tr '[:lower:]' '[:upper:]' < \"$1\" > \"$2\"",
     )
