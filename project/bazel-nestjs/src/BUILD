@@ -21,7 +21,6 @@ nodejs_binary(
     data = [
         ":backend",
         "@npm//:node_modules",
-
     ],
     entry_point = ":main.ts",
 )
