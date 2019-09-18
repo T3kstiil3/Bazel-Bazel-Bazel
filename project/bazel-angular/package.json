@@ -1,5 +1,5 @@
 {
-  "name": "bzl-angular",
+  "name": "bazel-angular",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
