@@ -14,7 +14,19 @@ https://aurelien-loyer.fr/bazel-bazel-bazel/
 
 ## Projects
 
-...
+### SCSS
+
+```
+# ibazel build //:build_css
+npm start
+# bazel build //:build_css
+npm run build 
+# bazel build //:build_css_custom_params
+npm run build:custom
+# simply a bazel clean
+npm run clean
+```
+
 
 ## Liens
 
