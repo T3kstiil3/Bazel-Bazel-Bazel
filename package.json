@@ -1,7 +1,7 @@
 {
 	"name": "bazel-bazel-bazel",
 	"version": "1.0.0",
-	"description": "bazel-bazel-bazel",
+	"description": "",
 	"directories": {
 		"doc": "docs"
 	},
