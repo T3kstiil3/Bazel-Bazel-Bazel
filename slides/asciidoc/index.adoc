@@ -19,40 +19,8 @@ ifndef::imagesdir[:imagesdir: images]
 
 [.notes]
 --
-Aujourd'hui nous allons parler de Build System. Pour mettre tout le monde au clair, qu'est-ce que c'est un build system. 
-C'est une toolchain qui à partir d'inputs va executer certaines commandes les unes à la suite des autres afin de créer vos 
-livrables. Durant cette toolchain, nous n'avons bien evidemment pas que la tache de creation du livrable, nous avons en plus 
-de cela pdes taches permettant de tester notre code, vérifier la qualité, ...
-
-TODO: 
-- Parler des problèmes rencontrés dans les solutions utilisées actuellement
-- gestion de dependencaes
+Parler du besoin actuel. Du temps de build et la taille du projet qui augmente, ...
 --
-
-== !
-
-image::google_codebase.png[]
-
-[.notes]
---
-Avec toutes ces limitations et toutes ces problèmatiques, imaginez deux minutes votre journée de travail chez Google donc la codebase est dans un et un seul gti giant mono repo. Imaginez vous à Mountain View pendans deux minutes. 
-Vous vous dites que cette taille de repo n'est surement pas pour vous, en effet. Nous ne sommes pas Google. Mais nous trouvons tout de meme interessant de regarder les outils utilisés par Google. 
---
-
-
-== Google
-
-[.column]
-* Piper
-* CiTC
-* Critique
-* Codesearch
-
-[.column]
-* Tricorder
-* Presubmit
-* TAP
-* Rosie
 
 == !
 
@@ -60,7 +28,6 @@ image::bazel.png[]
 
 [.notes]
 --
-OSS. Utilisé depuis 10 ans chez Google
 --
 
 [.speaker]
@@ -91,22 +58,75 @@ Consultant à Zenika Lille
 
 image::aurelien.jpeg[]
 
+== Qui l'utilise ?
+
+* Google 
+* Elastic
+
+[.notes]
+--
+TODO : Trouver d'autres societes
+--
+
+== !
+
+image::google_codebase.png[]
+
+[.notes]
+--
+Bazel est donc un outil de build créé par Google, au début pour un usage interne. En effet, il est utilisé, sous un nom different Blaze, depuis plusieurs année sur leur monorepo contenant presque la totalité des projets dévéloppés par Google voir même les dépendances et les outils utiliseé. 
+Bien evidemment, Google à mis en place de nombreux outils pour faciliter et rendre possible l'utilisation d'un mono repo pour les developpeurs
+--
+
+
+== Google
+
+[.column]
+* Piper
+* CiTC
+* Critique
+* Codesearch
+
+[.column]
+* Tricorder
+* Presubmit
+* TAP
+* Rosie
+
+[.notes]
+--
+Nous avons par exemple ces outils qui on en charge de faciliter l'utilisation du mono repo chez Google
+--
+
 == !
 
 NOTE: Build and test software of any size, quickly and reliably.
 
 [.notes]
 --
-TODO: 
-- Mettre la définition de Bazel 
+Et donc l'une des brique primordial est Bazel. Afin de partir sur des bonnes bases, nous allons définir tout d'abord 
+--
+
+== !
+
+[.notes]
+--
+TODO: Mettre le logo d'angular
+Parler que nous aurions pu faire juste une demo d'angular avec bazel, mais cela n'aurait pas permis de comprendre la syntaxe. 
+Mais faire tout de mmeme une demo d'angular cli avec le support Bazel pour montrer le support et le fait que cela ne change rien pour l'utilisateur
 --
 
 == Terminologie
 
+* workspace
+* package
+* target
+* rule
+* label
+* extension
+
 [.notes]
 --
-TODO: 
-- Workspace, Build, Package, bzl file, action, skylark
 --
 
 == Getting Started
@@ -114,63 +134,90 @@ TODO:
 [.notes]
 --
 TODO: 
-- Installation / CLI
+- Screenshot d'un arbo bazel avec un WORKSPACE et des fichiers BUILD
 --
 
-== Getting Started
-
-[.notes]
---
-TODO: 
-- Ajouter un screenshot avec un fichier WORKSPACE et un fichier BUILD
---
-
-== Getting started
+== Starlark
 
 [.notes]
 --
 TODO: 
-- MEttre le snippet du genrule
+- Presenter Starlark
 --
 
-== Getting started
-
-[.notes]
---
-TODO: 
-- Flow d'actions avec deux gen_rules
---
-
-== Getting started
+== Starlark
 
 [.notes]
 --
 TODO: 
-- Demo
-- Creation d'une regle custom 
+- Mettre le contenu d'un fichier bzl. Pour montrer que c'est tres complique et que nous allons preferer utiliser des rules predefinies
 --
 
+== Multi Langage
+
+[.notes]
+--
+TODO: Mettre la liste des language supportes
+TODO : Parler d'extensibilite
+--
+
+== Fonctions pures
+
+[.notes]
+--
+TODO: 
+- Mettre le snippet et la definition d'une fonctin pure
+--
+
+== Fonctions pures
+
+[.notes]
+--
+TODO: 
+- Mettre le snippet et la definition d'une fonctin pure qui en appelle une autre. pour montrer que le resultat reste une fonction pure
+--
+
+== Fonctions pures
+
+[.notes]
+--
+TODO: 
+- TODO Mettre la commande pour generer le graph pour le projet angular
+- DEMO Presenter le graph du projet angular
+--
+
+== Les labels
+
+[.notes]
+--
+TODO: 
+- Mettre les regles pour utiliser des LABELS
+--
+
+== Cheatsheet
+
+[.notes]
+--
+TODO: 
+- appeler gen_rule
+--
+
+
+== Cheatsheet
+
+[.notes]
+--
+TODO: 
+- appeler gen_rule apres une autre genrule pour montrer la dependances
+--
 == Custom rules
 
 [.notes]
 --
 TODO: 
 - Mettre le code de la regle BZL ici 
---
-
-== Telechargement d'une regle
-
-load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
-
-http_archive(
-    name = "build_bazel_rules_nodejs",
-    sha256 = "6d4edbf28ff6720aedf5f97f9b9a7679401bf7fca9d14a0fff80f644a99992b4",
-    urls = ["https://github.com/bazelbuild/rules_nodejs/releases/download/0.32.2/rules_nodejs-0.32.2.tar.gz"],
-)
-
-[.notes]
---
-TODO: 
+- Montrer comment charger le fichier 
+- Montrer le parametrage d'une regle custom 
 --
 
 == Demo
