@@ -19,7 +19,7 @@ ifndef::imagesdir[:imagesdir: images]
 
 [.notes]
 --
-Parler du besoin actuel. Du temps de build et la taille du projet qui augmente, ...
+Nous sommes à une epoque ou la taille de nos projet est de plus en grande, le nombre de dependances grossit de jour en jour, ou encore la duree d'un build et de nots tests sont trop long pour avoir un feedback rapidement. Nous ne sommes pas les seuls a avoir ce problème. En effet, des grosses sociétes se sont penchés sur le sujet, et notamment Google qui propose ...
 --
 
 == !
@@ -28,6 +28,7 @@ image::bazel.png[]
 
 [.notes]
 --
+l'outil open-source Bazel que nous allons vous présenter aujourd'hui
 --
 
 [.speaker]
@@ -62,6 +63,7 @@ image::aurelien.jpeg[]
 
 * Google 
 * Elastic
+* Wix
 
 [.notes]
 --
@@ -116,6 +118,16 @@ Parler que nous aurions pu faire juste une demo d'angular avec bazel, mais cela 
 Mais faire tout de mmeme une demo d'angular cli avec le support Bazel pour montrer le support et le fait que cela ne change rien pour l'utilisateur
 --
 
+== Caracteristiques
+
+* Sandboxed
+* Incremental
+
+[.notes]
+--
+Parler du remote execution
+--
+
 == Terminologie
 
 * workspace
@@ -135,6 +147,7 @@ Mais faire tout de mmeme une demo d'angular cli avec le support Bazel pour montr
 --
 TODO: 
 - Screenshot d'un arbo bazel avec un WORKSPACE et des fichiers BUILD
+- Parler de la granularité a utiliser. comme mave ? ou une granulatie plus petite. on gagne en performance, mais on perd en maintenabilite
 --
 
 == Starlark
@@ -163,35 +176,69 @@ TODO : Parler d'extensibilite
 
 == Fonctions pures
 
+[source,javascript]
+----
+function sum( a:number, b: number): number {
+    return a + b;
+}
+const result = sum(1 + 2);
+----
+
 [.notes]
 --
-TODO: 
-- Mettre le snippet et la definition d'une fonctin pure
 --
 
 == Fonctions pures
 
+[source,javascript]
+----
+function sum( a:number, b: number): number {
+    return a + b;
+}
+
+function mult( a:number, factor: number): number {
+    return a * factor;
+}
+
+const result = mult( sum(1, 2), 3);
+----
+
 [.notes]
 --
-TODO: 
-- Mettre le snippet et la definition d'une fonctin pure qui en appelle une autre. pour montrer que le resultat reste une fonction pure
 --
 
 == Fonctions pures
 
+image::deps.svg[]
+
 [.notes]
 --
-TODO: 
-- TODO Mettre la commande pour generer le graph pour le projet angular
 - DEMO Presenter le graph du projet angular
+bazel query "deps(//packages/http)" --output graph | dot -Tpng > /tmp/dep.png
+open /tmp/dep.png 
 --
 
 == Les labels
 
+* //foo/bar:wiz	
+* //foo/bar
+* //foo/bar:all
+* //foo/...
+
 [.notes]
 --
-TODO: 
-- Mettre les regles pour utiliser des LABELS
+--
+
+== Les labels
+
+Si je suis dans le répertoire `foo`
+
+* :foo == //foo:foo.
+* bar:wiz == //foo/bar:wiz.
+* bar/wiz == //foo/bar/wiz:wiz.
+
+[.notes]
+--
 --
 
 == Cheatsheet
@@ -210,6 +257,9 @@ TODO:
 TODO: 
 - appeler gen_rule apres une autre genrule pour montrer la dependances
 --
+
+== Macro
+
 == Custom rules
 
 [.notes]
@@ -235,4 +285,12 @@ TODO:
 - Ajouter un diff GIT pour montrer les fichiers ajoutés
 - Support dans Angular CLI 
 - Builder en remote avec plus core 
+Ce n'est pas pour tout le monde
+Pour un startup ou un nouveau projet, ne pas choisir bazel
+Choisir une solution historique. si le projet grossit, eventuellement .
+
+Ecosysteme plus large
+Syntaxe a simplifier 
+Documentation
+Creer de l'outillage pour faciliter la migraton. Un plugin existe deja pour migrer maven, et gazelle pour le monde nodejs
 --
