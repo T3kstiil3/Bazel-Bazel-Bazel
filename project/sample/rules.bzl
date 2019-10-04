@@ -1,4 +1,26 @@
-def _convert_to_uppercase_impl(ctx):
+load("@npm_bazel_typescript//:index.bzl", "ts_library")
+
+def compile_license(name, **kwargs):
+    ts_library(
+        name = "_%s_compile" % name,
+        **kwargs
+    )
+
+    native.filegroup(
+        name = name,
+        srcs = ["_%s_compile" % name],
+        output_group = "es5_sources",
+    )
+
+    native.genrule(
+        name = "%s_with_license" % name,
+        visibility = ["//visibility:public"],
+        srcs = [name],
+        outs = ["%s.out.js" % name],
+        cmd = "echo '//@EmmanuelDemey and @AurelienLoyer - 2019' | cat - \"$<\" > \"$@\"",
+    )
+
+def _merge_file_impl(ctx):
     # Both the input and output files are specified by the BUILD file.
     in_file = ctx.files.srcs
     out_file = ctx.outputs.output
@@ -13,8 +35,8 @@ def _convert_to_uppercase_impl(ctx):
     # building this target -- It's implied because the output is declared
     # as an attribute rather than with `declare_file()`.
 
-convert_to_uppercase = rule(
-    implementation = _convert_to_uppercase_impl,
+merge_file = rule(
+    implementation = _merge_file_impl,
     attrs = {
         "srcs": attr.label_list(
             allow_files = True,

@@ -1,7 +1,9 @@
-genrule(
-  name = "copy_of_main",
-  visibility = ["//visibility:public"],
-  srcs = ["foo.txt"],
-  outs = ["foo.upper.txt"],
-  cmd = "tr '[:lower:]' '[:upper:]' < \"$<\" > \"$@\"",
+load("//:rules.bzl", "compile_license")
+
+package(default_visibility=["//visibility:public"])
+
+compile_license(
+    name = "subproject1",
+    srcs = ["subproject1.ts"], 
+    tsconfig = ":tsconfig.json",
 )

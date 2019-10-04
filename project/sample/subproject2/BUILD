@@ -1,7 +1,16 @@
-load("//:rules.bzl", "convert_to_uppercase")
+load("//:rules.bzl", "merge_file")
+load("@npm_bazel_typescript//:index.bzl", "ts_library")
 
-convert_to_uppercase(
-    name = "make_uppercase",
-    srcs = ["file1.txt", "//subproject1:copy_of_main"],
-    output = "final_foo.txt",
+package(default_visibility=["//visibility:public"])
+
+ts_library(
+    name = "typescript",
+    srcs = glob(["*.ts"]),
+    tsconfig = ":tsconfig.json",
+)
+
+merge_file(
+    name = "subproject2",
+    srcs = ["//subproject1:prod", "subproject2.ts"],
+    output = "subproject2.out.js"
 )
