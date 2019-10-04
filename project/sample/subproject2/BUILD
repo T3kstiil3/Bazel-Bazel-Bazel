@@ -1,16 +1,16 @@
-load("//:rules.bzl", "merge_file")
+load("//:rules.bzl", "merge_file", "compile_license")
 load("@npm_bazel_typescript//:index.bzl", "ts_library")
 
 package(default_visibility=["//visibility:public"])
 
-ts_library(
-    name = "typescript",
-    srcs = glob(["*.ts"]),
+compile_license(
+    name = "subproject2_js",
+    srcs = ["subproject2.ts"], 
     tsconfig = ":tsconfig.json",
 )
 
 merge_file(
     name = "subproject2",
-    srcs = ["//subproject1:prod", "subproject2.ts"],
+    srcs = ["//subproject1", "subproject2_js"],
     output = "subproject2.out.js"
 )

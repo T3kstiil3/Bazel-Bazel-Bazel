@@ -2,20 +2,20 @@ load("@npm_bazel_typescript//:index.bzl", "ts_library")
 
 def compile_license(name, **kwargs):
     ts_library(
-        name = "_%s_compile" % name,
+        name = "%s_ts" % name,
         **kwargs
     )
 
     native.filegroup(
-        name = name,
-        srcs = ["_%s_compile" % name],
+        name = "%s_es5" % name,
+        srcs = ["%s_ts" % name],
         output_group = "es5_sources",
     )
 
     native.genrule(
-        name = "%s_with_license" % name,
+        name = name,
         visibility = ["//visibility:public"],
-        srcs = [name],
+        srcs = ["%s_es5" % name],
         outs = ["%s.out.js" % name],
         cmd = "echo '//@EmmanuelDemey and @AurelienLoyer - 2019' | cat - \"$<\" > \"$@\"",
     )
