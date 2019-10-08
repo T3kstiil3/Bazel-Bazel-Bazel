@@ -1,7 +1,7 @@
 {
     "directoryName": "bazel-bazel-bazel",
-    "projectName": "bazel-bazel-bazel",
-    "projectDescription": "bazel-bazel-bazel",
+    "projectName": "Bazel Bazel Bazel",
+    "projectDescription": "",
     "projectAuthorsTwitter": "@AurelienLoyer @EmmanuelDemey",
     "types": [
         "slides"

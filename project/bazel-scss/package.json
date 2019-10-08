@@ -1,0 +1,17 @@
+{
+  "name": "bazel-scss",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "ibazel build //:build_css",
+    "build": "npm run clean && bazel build //:build_css",
+    "build:custom": "npm run clean && bazel build //:build_css_custom_params",
+    "clean": "bazel clean"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@bazel/bazel": "^0.29.0",
+    "@bazel/ibazel": "^0.10.3"
+  }
+}
