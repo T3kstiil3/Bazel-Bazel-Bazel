@@ -656,3 +656,45 @@ div.black.background {
   list-style: none;
   float: left;
 }
+
+.list-without-style ul {
+  list-style: none;
+}
+
+.two-em {
+  font-size: 2em;
+}
+.hidden-title h2 {
+  display: none;
+}
+.companies {
+  display: flex !important;
+  flex-wrap: wrap;
+}
+
+.companies > div {
+  flex: 1 0 33%;
+}
+
+img {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.note {
+  font-size: 2em !important;
+  font-style: italic !important;
+}
+
+.fragment {
+  color: #d0cfcf;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.visible.fragment {
+  color: black;
+}
+.reveal pre code {
+  max-height: 470px !important;
+}

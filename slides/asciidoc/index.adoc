@@ -19,7 +19,7 @@ ifndef::imagesdir[:imagesdir: images]
 
 [.notes]
 --
-Nous sommes à une epoque ou la taille de nos projet est de plus en grande, le nombre de dependances grossit de jour en jour, ou encore la duree d'un build et de nots tests sont trop long pour avoir un feedback rapidement. Nous ne sommes pas les seuls a avoir ce problème. En effet, des grosses sociétes se sont penchés sur le sujet, et notamment Google qui propose ...
+Nous sommes à une epoque ou la taille de nos projet est de plus en grande, le nombre de dependances grossit de jour en jour, ou encore la duree d'un build et de nots tests sont trop long pour avoir un feedback rapidement. parler de lInner source . ous ne sommes pas les seuls a avoir ce problème. En effet, des grosses sociétes se sont penchés sur le sujet, et notamment Google qui propose ... 
 --
 
 == !
@@ -59,11 +59,15 @@ Consultant à Zenika Lille
 
 image::aurelien.jpeg[]
 
-== Qui l'utilise ?
+[.companies]
+== !
 
-* Google 
-* Elastic
-* Wix
+image::google.png[]
+image::elastic.png[]
+image::wix.png[]
+image::etsy.png[]
+image::dropbox.png[]
+image::stripe.png[]
 
 [.notes]
 --
@@ -81,7 +85,7 @@ Bien evidemment, Google à mis en place de nombreux outils pour faciliter et ren
 --
 
 
-== Google
+== 🛠 chez Google
 
 [.column]
 * Piper
@@ -107,41 +111,65 @@ NOTE: Build and test software of any size, quickly and reliably.
 [.notes]
 --
 Et donc l'une des brique primordial est Bazel. Afin de partir sur des bonnes bases, nous allons définir tout d'abord 
+Parler du remote execution
+
 --
 
 == !
 
+image::angular.png[]
+
 [.notes]
 --
-TODO: Mettre le logo d'angular
 Parler que nous aurions pu faire juste une demo d'angular avec bazel, mais cela n'aurait pas permis de comprendre la syntaxe. 
 Mais faire tout de mmeme une demo d'angular cli avec le support Bazel pour montrer le support et le fait que cela ne change rien pour l'utilisateur
+
+ng new . ...
+git add . git commit
+ng add @angular/bazel
+git diff
+executer deux fois pour voir le temps d'execution
 --
 
-== Caracteristiques
+== !
 
-* Sandboxed
-* Incremental
+++++
+<iframe src="https://giphy.com/embed/UrEQirmnMPxBwToULv" width="960" height="540" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+++++
 
 [.notes]
 --
-Parler du remote execution
+Demo
 --
 
+== !
+
+NOTE: Il faut voir Bazel comme un orchestrateur, et non comme un nouvel outil de build à apprendre
+
+[.notes]
+--
+--
+
+[.list-without-style.hidden-title.two-em]
 == Terminologie
 
-* workspace
-* package
-* target
-* rule
-* label
-* extension
+[%step]
+* Workspace
+* Package
+* Target
+* Rule
+* Label
+* Extension
 
 [.notes]
 --
 --
 
 == Getting Started
+
+++++
+<iframe src="https://giphy.com/embed/1BFGiiHYS2dAbC0Lx1" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+++++
 
 [.notes]
 --
@@ -150,15 +178,44 @@ TODO:
 - Parler de la granularité a utiliser. comme mave ? ou une granulatie plus petite. on gagne en performance, mais on perd en maintenabilite
 --
 
+[.hidden-title]
+== Getting Started
+
+image::structure.png[structure,600,600]
+
+
 == Starlark
+
+[source,python]
+----
+def fizz_buzz(n):
+  """Print Fizz Buzz numbers from 1 to n."""
+  for i in range(1, n + 1):
+    s = ""
+    if i % 3 == 0:
+      s += "Fizz"
+    if i % 5 == 0:
+      s += "Buzz"
+    print(s if s else i)
+
+fizz_buzz(20)
+----
 
 [.notes]
 --
-TODO: 
-- Presenter Starlark
 --
 
-== Starlark
+== Différence avec Python
+
+[%step]
+* Les variables globales sont immutables
+* Les `for` et `if` utilisables que dans des fonctions
+* Recursion impossible
+* Modifier une collection pendant une itération
+* Les `class` et `import` non supportés (`struct` et `load`).
+* Les `string` sont entre double quotes
+* ...
+
 
 [.notes]
 --
@@ -166,7 +223,31 @@ TODO:
 - Mettre le contenu d'un fichier bzl. Pour montrer que c'est tres complique et que nous allons preferer utiliser des rules predefinies
 --
 
-== Multi Langage
+== 🇫🇷 Multi Langage
+
+[.column]
+* Android
+* C / C++
+* C#
+* Docker
+* Go
+* Groovy
+
+[.column]
+* Kotlin
+* iOS
+* Java
+* Javascript
+* Perl
+* Rust
+
+[.column]
+* Python
+* Ruby
+* Rust
+* Sass
+* Typescript
+* ...
 
 [.notes]
 --
@@ -188,7 +269,7 @@ const result = sum(1 + 2);
 --
 --
 
-== Fonctions pures
+=== Fonctions pures
 
 [source,javascript]
 ----
@@ -207,7 +288,7 @@ const result = mult( sum(1, 2), 3);
 --
 --
 
-== Fonctions pures
+=== Fonctions pures
 
 image::deps.svg[]
 
@@ -220,6 +301,13 @@ open /tmp/dep.png
 
 == Les labels
 
+Un label correspond à 
+
+* un fichier 
+* une target
+
+=== Les labels
+
 * //foo/bar:wiz	
 * //foo/bar
 * //foo/bar:all
@@ -229,7 +317,7 @@ open /tmp/dep.png
 --
 --
 
-== Les labels
+=== Les labels
 
 Si je suis dans le répertoire `foo`
 
@@ -241,7 +329,19 @@ Si je suis dans le répertoire `foo`
 --
 --
 
-== Cheatsheet
+== Créer une target
+
+[source,python]
+----
+genrule(
+    name = "copy-file",
+    srcs = [
+        "//some:file",
+    ],
+    outs = ["concatenated.txt"],
+    cmd = "cp $< $@",
+)
+----
 
 [.notes]
 --
@@ -250,7 +350,26 @@ TODO:
 --
 
 
-== Cheatsheet
+== Dépendances
+
+[source,python]
+----
+genrule(
+    name = "copy-file",
+    srcs = [ "//some:file" ],
+    outs = ["concatenated.txt"],
+    cmd = "cp $< $@",
+)
+
+genrule(
+    name = "copy-file",
+    srcs = [
+        "copy-file", "//some:file2",
+    ],
+    outs = ["final.txt"],
+    cmd = "cat $(locations //copy-file) $(location //some:file2) > $@",
+)
+----
 
 [.notes]
 --
@@ -260,7 +379,60 @@ TODO:
 
 == Macro
 
+[source,python]
+----
+def my_macro(name, **kwargs):
+    genrule(
+        name = "%s_first" % name,
+        srcs = [ "//some:file" ],
+        outs = ["concatenated.txt"],
+        cmd = "cp $< $@",
+    )
+
+    genrule(
+        name = name,
+        **kwargs
+    )
+----
+
+== Macro
+
+[source,python]
+----
+my_macro(
+    name = "copy-file",
+    srcs = [
+        "copy-file", "//some:file2",
+    ],
+    outs = ["final.txt"],
+    cmd = "cat $(locations //copy-file) $(location //some:file2) > $@",
+)
+----
+
 == Custom rules
+
+[source,python]
+----
+def ts_binary_impl(ctx):
+  files = list(get_transitive_files(ctx))
+  output = ctx.outputs.out
+  flags = ' '.join(ctx.attr.flags)
+  ctx.action(
+      inputs=files,
+      outputs=[output],
+      command="tsc %s --out %s %s" % (
+          flags, output.path, ' '.join([f.path for f in files])))
+
+ts_binary = rule(
+  implementation = ts_binary_impl,
+  attrs = {
+      "srcs": attr.label_list(allow_files=ts_filetype),
+      "deps": attr.label_list(allow_files=False),
+      "flags": attr.string_list(),
+  },
+  outputs = {"out": "%{name}.js"},
+)]
+----
 
 [.notes]
 --
@@ -270,14 +442,28 @@ TODO:
 - Montrer le parametrage d'une regle custom 
 --
 
-== Demo
+== !
+
+++++
+<iframe src="https://giphy.com/embed/uhb1F8ebDgkzC" width="960" height="540" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+++++
 
 [.notes]
 --
-TODO: 
+TODO:
+- /Users/emmanueldemey/Documents/workspaces/oss/rules_nodejs/packages/labs/src/protobufjs/ts_proto_library.bzls
+- Parler que nous pouvons définir des variabls privées
+- Parler de l'outillage
+    - Parler du beautifuer
+    - Parler des extensions VSCode
+revenir sur le code angulkar pour expliquer les fichiers build genere
+https://dev.to/jakeherringbone/layering-in-bazel-for-web-389h
 --
 
+[.hidden-title]
 == Conclusion
+
+image::release.png[release,600,600]
 
 [.notes]
 --
