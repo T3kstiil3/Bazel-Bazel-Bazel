@@ -1,0 +1,14 @@
+@import 'shared/fonts';
+@import 'shared/colors';
+
+html {
+	body {
+        color: $main;
+        font-family: $default-font;
+        font-weight: bold;
+		h1 {
+			color: $secondary;
+			font-family: $modern-font;
+		}
+	}
+}
