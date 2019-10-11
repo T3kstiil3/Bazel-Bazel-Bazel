@@ -32,7 +32,7 @@ l'outil open-source Bazel que nous allons vous présenter aujourd'hui
 --
 
 [.speaker]
-=== !
+== !
 
 [id="speaker-bio"]
 --
@@ -46,7 +46,7 @@ Developer Advocate à Zenika Lille
 image::emmanuel.jpg[]
 
 [.speaker]
-=== !
+== !
 
 [id="speaker-bio"]
 --
@@ -399,6 +399,8 @@ def my_macro(name, **kwargs):
 
 [source,python]
 ----
+load("//:rules.bzl", "my_macro")
+
 my_macro(
     name = "copy-file",
     srcs = [
@@ -458,6 +460,7 @@ TODO:
     - Parler des extensions VSCode
 revenir sur le code angulkar pour expliquer les fichiers build genere
 https://dev.to/jakeherringbone/layering-in-bazel-for-web-389h
+presentation de ibazel
 --
 
 [.hidden-title]
@@ -480,3 +483,7 @@ Syntaxe a simplifier
 Documentation
 Creer de l'outillage pour faciliter la migraton. Un plugin existe deja pour migrer maven, et gazelle pour le monde nodejs
 --
+
+== Pour aller plus loin 
+
+- https://www.youtube.com/watch?v=2UOFm-Cc_cU[Migration Maven / Gradle vers Bazel]
