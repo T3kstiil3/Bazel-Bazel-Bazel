@@ -19,6 +19,8 @@ ifndef::imagesdir[:imagesdir: images]
 
 [.notes]
 --
+Aurelien
+
 Nous sommes à une epoque ou la taille de nos projet est de plus en grande, le nombre de dependances grossit de jour en jour, ou encore la duree d'un build et de nots tests sont trop long pour avoir un feedback rapidement. parler de lInner source . ous ne sommes pas les seuls a avoir ce problème. En effet, des grosses sociétes se sont penchés sur le sujet, et notamment Google qui propose ... 
 --
 
@@ -28,6 +30,7 @@ image::bazel.png[]
 
 [.notes]
 --
+Aurelien
 l'outil open-source Bazel que nous allons vous présenter aujourd'hui
 --
 
@@ -71,7 +74,10 @@ image::stripe.png[]
 
 [.notes]
 --
-TODO : Trouver d'autres societes
+Aurelien
+* google - . blaze
+elastic a fait un poc pour leur offre cloud
+wix a fait une migration de maven vers bazel
 --
 
 == !
@@ -80,6 +86,7 @@ image::google_codebase.png[]
 
 [.notes]
 --
+Aurelien
 Bazel est donc un outil de build créé par Google, au début pour un usage interne. En effet, il est utilisé, sous un nom different Blaze, depuis plusieurs année sur leur monorepo contenant presque la totalité des projets dévéloppés par Google voir même les dépendances et les outils utiliseé. 
 Bien evidemment, Google à mis en place de nombreux outils pour faciliter et rendre possible l'utilisation d'un mono repo pour les developpeurs
 --
@@ -101,6 +108,7 @@ Bien evidemment, Google à mis en place de nombreux outils pour faciliter et ren
 
 [.notes]
 --
+Aurelien
 Nous avons par exemple ces outils qui on en charge de faciliter l'utilisation du mono repo chez Google
 --
 
@@ -110,9 +118,9 @@ NOTE: Build and test software of any size, quickly and reliably.
 
 [.notes]
 --
+Aurelien
 Et donc l'une des brique primordial est Bazel. Afin de partir sur des bonnes bases, nous allons définir tout d'abord 
 Parler du remote execution
-
 --
 
 
@@ -120,9 +128,19 @@ Parler du remote execution
 
 image::angular-pr.png[]
 
+[.notes]
+--
+Aurelien
+--
+
 == !
 
 image::angular.png[]
+
+[.notes]
+--
+Aurelien
+--
 
 == !
 
@@ -135,6 +153,7 @@ image::angular-build.png[]
 
 [.notes]
 --
+Aurelien
 Parler que nous aurions pu faire juste une demo d'angular avec bazel, mais cela n'aurait pas permis de comprendre la syntaxe. 
 Mais faire tout de mmeme une demo d'angular cli avec le support Bazel pour montrer le support et le fait que cela ne change rien pour l'utilisateur
 
@@ -278,6 +297,7 @@ const result = sum(1 + 2);
 
 [.notes]
 --
+Aurelien
 --
 
 === Fonctions pures
@@ -297,6 +317,7 @@ const result = mult( sum(1, 2), 3);
 
 [.notes]
 --
+Aurelien
 --
 
 === Fonctions pures
@@ -305,6 +326,7 @@ image::deps.svg[]
 
 [.notes]
 --
+Aurelien
 - DEMO Presenter le graph du projet angular
 bazel query "deps(//packages/http)" --output graph | dot -Tpng > /tmp/dep.png
 open /tmp/dep.png 
@@ -460,6 +482,7 @@ ts_binary = rule(
 [.notes]
 --
 TODO:
+Manu
 - /Users/emmanueldemey/Documents/workspaces/oss/rules_nodejs/packages/labs/src/protobufjs/ts_proto_library.bzls
 - Parler que nous pouvons définir des variabls privées
 - Parler de l'outillage
@@ -468,6 +491,10 @@ TODO:
 revenir sur le code angulkar pour expliquer les fichiers build genere
 https://dev.to/jakeherringbone/layering-in-bazel-for-web-389h
 presentation de ibazel
+
+DEmo angular d'aurelien
+
+Demo rule node Manu
 --
 
 [.hidden-title]
@@ -477,6 +504,7 @@ image::release.png[release,600,600]
 
 [.notes]
 --
+Manu
 TODO: 
 - Ajouter un diff GIT pour montrer les fichiers ajoutés
 - Support dans Angular CLI 
