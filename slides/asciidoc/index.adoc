@@ -62,24 +62,6 @@ Consultant à Zenika Lille
 
 image::aurelien.jpeg[]
 
-[.companies]
-== !
-
-image::google.png[]
-image::elastic.png[]
-image::wix.png[]
-image::etsy.png[]
-image::dropbox.png[]
-image::stripe.png[]
-
-[.notes]
---
-Aurelien
-* google - . blaze
-elastic a fait un poc pour leur offre cloud
-wix a fait une migration de maven vers bazel
---
-
 == !
 
 image::google_codebase.png[]
@@ -110,6 +92,24 @@ Bien evidemment, Google à mis en place de nombreux outils pour faciliter et ren
 --
 Aurelien
 Nous avons par exemple ces outils qui on en charge de faciliter l'utilisation du mono repo chez Google
+--
+
+[.companies]
+== !
+
+image::google.png[]
+image::elastic.png[]
+image::wix.png[]
+image::etsy.png[]
+image::dropbox.png[]
+image::stripe.png[]
+
+[.notes]
+--
+Aurelien
+* google - . blaze
+elastic a fait un poc pour leur offre cloud
+wix a fait une migration de maven vers bazel
 --
 
 == !
