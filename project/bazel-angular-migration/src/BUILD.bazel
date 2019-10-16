@@ -27,6 +27,7 @@ ng_module(
         include = ["**/*.ts"],
         exclude = [
             "**/*.spec.ts",
+             "app/admin/*.ts",
             "main.ts",
             "test.ts",
             "initialize_testbed.ts",
@@ -37,6 +38,7 @@ ng_module(
       "**/*.html",
     ]) + ([":styles"] if len(glob(["**/*.scss"])) else []),
     deps = [
+        "//src/app/admin:admin",
         "@npm//@angular/core",
         "@npm//@angular/platform-browser",
         "@npm//@angular/router",
