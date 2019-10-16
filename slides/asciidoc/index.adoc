@@ -124,6 +124,53 @@ Parler du remote execution
 --
 
 
+== Fonctions pures
+
+[source,javascript]
+----
+function sum( a:number, b: number): number {
+    return a + b;
+}
+const result = sum(1 + 2);
+----
+
+[.notes]
+--
+Aurelien
+--
+
+=== Fonctions pures
+
+[source,javascript]
+----
+function sum( a:number, b: number): number {
+    return a + b;
+}
+
+function mult( a:number, factor: number): number {
+    return a * factor;
+}
+
+const result = mult( sum(1, 2), 3);
+----
+
+[.notes]
+--
+Aurelien
+--
+
+=== Fonctions pures
+
+image::deps.svg[]
+
+[.notes]
+--
+Aurelien
+- DEMO Presenter le graph du projet angular
+bazel query "deps(//packages/http)" --output graph | dot -Tpng > /tmp/dep.png
+open /tmp/dep.png 
+--
+
 == !
 
 image::angular-pr.png[]
@@ -172,19 +219,36 @@ NOTE: Il faut voir Bazel comme un orchestrateur, et non comme un nouvel outil de
 --
 --
 
-[.list-without-style.hidden-title.two-em]
-== Terminologie
+== 🇫🇷 Multi Langage
 
-[%step]
-* Workspace
-* Package
-* Target
-* Rule
-* Label
-* Extension
+[.column]
+* Android
+* C / C++
+* C#
+* Docker
+* Go
+* Groovy
+
+[.column]
+* Kotlin
+* iOS
+* Java
+* Javascript
+* Perl
+* Rust
+
+[.column]
+* Python
+* Ruby
+* Rust
+* Sass
+* Typescript
+* ...
 
 [.notes]
 --
+Parler d'extensibilite. 
+faut indiquer que certains des languages sont supportés par défaut. 
 --
 
 == Getting Started
@@ -196,15 +260,8 @@ NOTE: Il faut voir Bazel comme un orchestrateur, et non comme un nouvel outil de
 [.notes]
 --
 TODO: 
-- Screenshot d'un arbo bazel avec un WORKSPACE et des fichiers BUILD
 - Parler de la granularité a utiliser. comme mave ? ou une granulatie plus petite. on gagne en performance, mais on perd en maintenabilite
 --
-
-[.hidden-title]
-== Getting Started
-
-image::structure.png[structure,600,600]
-
 
 == Starlark
 
@@ -252,84 +309,61 @@ TODO:
 [source,python]
 include::starlark[]
 ----
+[.list-without-style.hidden-title.two-em]
+== Terminologie
 
-== 🇫🇷 Multi Langage
-
-[.column]
-* Android
-* C / C++
-* C#
-* Docker
-* Go
-* Groovy
-
-[.column]
-* Kotlin
-* iOS
-* Java
-* Javascript
-* Perl
-* Rust
-
-[.column]
-* Python
-* Ruby
-* Rust
-* Sass
-* Typescript
-* ...
+[%step]
+* Workspace
+* Package
+* Rule
+* Target
+* Label
+* Extension
 
 [.notes]
 --
-Parler d'extensibilite. 
-faut indiquer que certains des languages sont supportés par défaut. 
 --
 
-== Fonctions pures
 
-[source,javascript]
+[.hidden-title]
+== Getting Started
+
+image::structure.png[structure,600,600]
+
+
+== Utiliser une rule
+
+[source,python]
 ----
-function sum( a:number, b: number): number {
-    return a + b;
-}
-const result = sum(1 + 2);
+genrule(
+    srcs = [ ... ],
+    outs = [ ... ],
+    cmd = " ... ",
+)
 ----
 
 [.notes]
 --
-Aurelien
+TODO: 
+- appeler gen_rule
 --
 
-=== Fonctions pures
+== Créer une target
 
-[source,javascript]
+[source,python]
 ----
-function sum( a:number, b: number): number {
-    return a + b;
-}
-
-function mult( a:number, factor: number): number {
-    return a * factor;
-}
-
-const result = mult( sum(1, 2), 3);
+genrule(
+    name = "copy-file",
+    srcs = [ ... ],
+    outs = [ ... ],
+    cmd = " ... ",
+)
 ----
 
 [.notes]
 --
-Aurelien
---
-
-=== Fonctions pures
-
-image::deps.svg[]
-
-[.notes]
---
-Aurelien
-- DEMO Presenter le graph du projet angular
-bazel query "deps(//packages/http)" --output graph | dot -Tpng > /tmp/dep.png
-open /tmp/dep.png 
+TODO: 
+- appeler gen_rule
 --
 
 == Les labels
@@ -365,23 +399,17 @@ Si je suis dans le répertoire `foo`
 == Créer une target
 
 [source,python]
-----
+---- 
+// //nestjs/BUILD.bazel
 genrule(
     name = "copy-file",
     srcs = [
-        "//some:file",
+        "//angular:README.md",
     ],
-    outs = ["concatenated.txt"],
+    outs = ["README-nestjs.md"],
     cmd = "cp $< $@",
 )
 ----
-
-[.notes]
---
-TODO: 
-- appeler gen_rule
---
-
 
 == Dépendances
 
@@ -389,15 +417,17 @@ TODO:
 ----
 genrule(
     name = "copy-file",
-    srcs = [ "//some:file" ],
-    outs = ["concatenated.txt"],
+    srcs = [
+        "//angular:README.md",
+    ],
+    outs = ["README-nestjs.md"],
     cmd = "cp $< $@",
 )
 
 genrule(
-    name = "copy-file",
+    name = "concat",
     srcs = [
-        "copy-file", "//some:file2",
+        "copy-file", "//:LICENCE",
     ],
     outs = ["final.txt"],
     cmd = "cat $(locations //copy-file) $(location //some:file2) > $@",
@@ -414,11 +444,14 @@ TODO:
 
 [source,python]
 ----
+// //:rules.bzl
 def my_macro(name, **kwargs):
     genrule(
         name = "%s_first" % name,
-        srcs = [ "//some:file" ],
-        outs = ["concatenated.txt"],
+        srcs = [
+            "//angular:README.md",
+        ],
+        outs = ["README-nestjs.md"],
         cmd = "cp $< $@",
     )
 
@@ -435,12 +468,12 @@ def my_macro(name, **kwargs):
 load("//:rules.bzl", "my_macro")
 
 my_macro(
-    name = "copy-file",
+    name = "concat",
     srcs = [
-        "copy-file", "//some:file2",
+        "copy-file", "//:LICENCE",
     ],
     outs = ["final.txt"],
-    cmd = "cat $(locations //copy-file) $(location //some:file2) > $@",
+    cmd = "cat $(locations //copy-file) $(location //some:file2) > $@"
 )
 ----
 
