@@ -315,10 +315,6 @@ include::starlark[]
 [%step]
 * Workspace
 * Package
-* Rule
-* Target
-* Label
-* Extension
 
 [.notes]
 --
@@ -330,6 +326,16 @@ include::starlark[]
 
 image::structure.png[structure,600,600]
 
+[.list-without-style.hidden-title.two-em]
+== Terminologie
+
+[%step]
+* Rule
+* Target
+
+[.notes]
+--
+--
 
 == Utiliser une rule
 
