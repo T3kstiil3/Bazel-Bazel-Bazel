@@ -1,0 +1,55 @@
+== !
+
+image::angular-pr.png[]
+
+[.notes]
+--
+Aurel
+--
+
+=== !
+
+image::angular.png[]
+
+[.notes]
+--
+Aurel
+--
+
+=== !
+
+image::angular-build.png[]
+=== !
+
+++++
+<iframe src="https://giphy.com/embed/UrEQirmnMPxBwToULv" width="960" height="540" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+++++
+
+[.notes]
+--
+Aurel
+
+* Parler que nous aurions pu faire juste une demo d'angular avec bazel, mais cela n'aurait pas permis de comprendre la syntaxe. 
+Mais faire tout de meme une demo d'angular cli avec le support Bazel pour montrer le support et le fait que cela ne change rien pour l'utilisateur
+
+---
+ng new . ...
+git add . git commit
+ng add @angular/bazel
+git diff
+---
+
+* executer deux fois pour voir le temps d'execution
+--
+
+=== !
+
+* image apres le `ng add @angular/bazel`
+
+=== !
+
+* image diff deux build
+
+=== !
+
+* avec juste un changement de style :)

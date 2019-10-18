@@ -1,0 +1,46 @@
+== Fonctions pures
+
+[source,javascript]
+----
+function sum( a:number, b: number): number {
+    return a + b;
+}
+const result = sum(1 + 2);
+----
+
+[.notes]
+--
+Aurelien
+--
+
+=== Fonctions pures
+
+[source,javascript]
+----
+function sum( a:number, b: number): number {
+    return a + b;
+}
+
+function mult( a:number, factor: number): number {
+    return a * factor;
+}
+
+const result = mult( sum(1, 2), 3);
+----
+
+[.notes]
+--
+Aurelien
+--
+
+=== Fonctions pures
+
+image::deps.svg[]
+
+[.notes]
+--
+Aurelien
+- DEMO Presenter le graph du projet angular
+bazel query "deps(//packages/http)" --output graph | dot -Tpng > /tmp/dep.png
+open /tmp/dep.png 
+--
