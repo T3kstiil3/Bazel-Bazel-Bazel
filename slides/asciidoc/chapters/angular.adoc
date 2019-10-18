@@ -19,6 +19,14 @@ Aurel
 === !
 
 image::angular-build.png[]
+
+=== !
+
+[source]
+----
+npm run ng add @angular/bazel
+----
+
 === !
 
 ++++
@@ -33,7 +41,8 @@ Aurel
 Mais faire tout de meme une demo d'angular cli avec le support Bazel pour montrer le support et le fait que cela ne change rien pour l'utilisateur
 
 ---
-ng new . ...
+npx @angular/cli new . ...
+npm run build
 git add . git commit
 ng add @angular/bazel
 git diff

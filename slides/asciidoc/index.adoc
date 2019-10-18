@@ -22,6 +22,10 @@ ifndef::imagesdir[:imagesdir: images]
 Aurelien
 
 Nous sommes à une epoque ou la taille de nos projet est de plus en grande, le nombre de dependances grossit de jour en jour, ou encore la duree d'un build et de nots tests sont trop long pour avoir un feedback rapidement. parler de lInner source . ous ne sommes pas les seuls a avoir ce problème. En effet, des grosses sociétes se sont penchés sur le sujet, et notamment Google qui propose ... 
+
+- inner sourcing
+- Bonne idée de parler de Qima
+
 --
 
 == !
@@ -166,10 +170,10 @@ TODO:
 [source,python]
 include::starlark[]
 ----
+
 [.list-without-style.hidden-title.two-em]
 == Terminologie
 
-[%step]
 * Workspace
 * Package
 
@@ -177,16 +181,32 @@ include::starlark[]
 --
 --
 
-
 [.hidden-title]
 == Getting Started
 
-image::structure.png[structure,600,600]
+image::monoreposgoogle.png[structure,600,600]
+
+[.list-without-style.hidden-title.two-em]
+== Workspace
+
+[.fullscreen]
+[source,python]
+----
+// WORKSPACE
+http_archive(
+    name = "build_bazel_rules_nodejs",
+    sha256 = "1249a60f88e4c0a46d78de06be04d3d41e7421dcfa0c956de65309a7b7ecf6f4",
+    urls = ["https://github.com/bazelbuild/rules_nodejs/releases/download/0.38.0/rules_nodejs-0.38.0.tar.gz"],
+)
+----
+
+[.notes]
+--
+--
 
 [.list-without-style.hidden-title.two-em]
 == Terminologie
 
-[%step]
 * Rule
 * Target
 
@@ -198,6 +218,7 @@ image::structure.png[structure,600,600]
 
 [source,python]
 ----
+// BUILD.bazel
 genrule(
     srcs = [ ... ],
     outs = [ ... ],
@@ -215,6 +236,7 @@ TODO:
 
 [source,python]
 ----
+// BUILD.bazel
 genrule(
     name = "copy-file",
     srcs = [ ... ],
@@ -238,10 +260,10 @@ Un label correspond à
 
 === Les labels
 
-* //foo/bar:wiz	
-* //foo/bar
-* //foo/bar:all
-* //foo/...
+* //gcp/finance:front	
+* //gcp/finance
+* //gcp/finance:all
+* //gcp/...
 
 [.notes]
 --
@@ -249,11 +271,10 @@ Un label correspond à
 
 === Les labels
 
-Si je suis dans le répertoire `foo`
+Si je suis dans le répertoire `gcp`
 
-* :foo == //foo:foo.
-* bar:wiz == //foo/bar:wiz.
-* bar/wiz == //foo/bar/wiz:wiz.
+* :all == //gcp:all
+* finance:front == //gcp/finance:front
 
 [.notes]
 --
@@ -263,13 +284,13 @@ Si je suis dans le répertoire `foo`
 
 [source,python]
 ---- 
-// //nestjs/BUILD.bazel
+// //gcp/BUILD.bazel
 genrule(
     name = "copy-file",
     srcs = [
         "//angular:README.md",
     ],
-    outs = ["README-nestjs.md"],
+    outs = ["README-gcp.md"],
     cmd = "cp $< $@",
 )
 ----
@@ -278,12 +299,13 @@ genrule(
 
 [source,python]
 ----
+// //gcp/BUILD.bazel
 genrule(
     name = "copy-file",
     srcs = [
         "//angular:README.md",
     ],
-    outs = ["README-nestjs.md"],
+    outs = ["README-gcp.md"],
     cmd = "cp $< $@",
 )
 
@@ -308,13 +330,13 @@ TODO:
 [source,python]
 ----
 // //:rules.bzl
-def my_macro(name, **kwargs):
+def generate_final_txt(name, **kwargs):
     genrule(
         name = "%s_first" % name,
         srcs = [
             "//angular:README.md",
         ],
-        outs = ["README-nestjs.md"],
+        outs = ["README-gcp.md"],
         cmd = "cp $< $@",
     )
 
@@ -328,9 +350,9 @@ def my_macro(name, **kwargs):
 
 [source,python]
 ----
-load("//:rules.bzl", "my_macro")
+load("//:rules.bzl", "generate_final_txt")
 
-my_macro(
+generate_final_txt(
     name = "concat",
     srcs = [
         "copy-file", "//:LICENCE",
