@@ -23,7 +23,7 @@ Aurelien
 
 * Epoque ou la taille de nos projet est de plus en grande
 * Le nombre de dependances grossit de jour en jour
-* Duree d'un build et de nots tests sont trop long pour avoir un feedback rapidement. 
+* Duree d'un build et des tests sont trop long pour avoir un feedback rapidement. 
 * Inner source 
 * Problème connu
 * En effet, des grosses sociétes se sont penchés sur le sujet, et notamment Google qui propose ...  
