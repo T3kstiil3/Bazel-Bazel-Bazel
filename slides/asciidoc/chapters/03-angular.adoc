@@ -9,11 +9,18 @@ Aurel
 
 === !
 
+image::angular-connect.png[]
+
+[.notes]
+--
+--
+
+=== !
+
 image::angular.png[]
 
 [.notes]
 --
-Aurel
 --
 
 === !
@@ -21,6 +28,8 @@ Aurel
 image::angular-build.png[]
 
 === !
+
+image::angular/angular-and-bazel.png[]
 
 [source]
 ----
@@ -35,8 +44,6 @@ npm run ng add @angular/bazel
 
 [.notes]
 --
-Aurel
-
 * Parler que nous aurions pu faire juste une demo d'angular avec bazel, mais cela n'aurait pas permis de comprendre la syntaxe. 
 Mais faire tout de meme une demo d'angular cli avec le support Bazel pour montrer le support et le fait que cela ne change rien pour l'utilisateur
 
@@ -53,12 +60,8 @@ git diff
 
 === !
 
-* image apres le `ng add @angular/bazel`
+image::angular/ng-build-bazel.png[]
 
 === !
 
-* image diff deux build
-
-=== !
-
-* avec juste un changement de style :)
+image::angular/ng-build-bazel-style.png[]

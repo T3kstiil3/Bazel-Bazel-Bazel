@@ -20,7 +20,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );</script><!--[if 
 <link rel="stylesheet" type="text/css" href="./fonts/EBGaramond.css" rel="stylesheet" />
 
 <script src="./theme/asciinema-player.js"></script></head><body><div class="reveal"><div class="slides"><section class="black background"><aside class="notes"><div class="paragraph"><p>Aurelien</p></div>
-<div class="paragraph"><p>Nous sommes à une epoque ou la taille de nos projet est de plus en grande, le nombre de dependances grossit de jour en jour, ou encore la duree d&#8217;un build et de nots tests sont trop long pour avoir un feedback rapidement. parler de lInner source . ous ne sommes pas les seuls a avoir ce problème. En effet, des grosses sociétes se sont penchés sur le sujet, et notamment Google qui propose &#8230;&#8203;</p></div></aside></section>
+<div class="ulist"><ul><li><p>Epoque ou la taille de nos projet est de plus en grande</p></li><li><p>Le nombre de dependances grossit de jour en jour</p></li><li><p>Duree d&#8217;un build et de nots tests sont trop long pour avoir un feedback rapidement.</p></li><li><p>Inner source</p></li><li><p>Problème connu</p></li><li><p>En effet, des grosses sociétes se sont penchés sur le sujet, et notamment Google qui propose &#8230;&#8203;</p></li><li><p>Bonne idée de parler de Qima</p></li></ul></div></aside></section>
 <section><div class="imageblock" style=""><img src="images/bazel.png" alt="bazel"></div>
 <aside class="notes"><div class="paragraph"><p>Aurelien
 l&#8217;outil open-source Bazel que nous allons vous présenter aujourd&#8217;hui</p></div></aside></section>
@@ -33,11 +33,14 @@ l&#8217;outil open-source Bazel que nous allons vous présenter aujourd&#8217;hu
 <div class="paragraph"><p>@AurelienDemey</p></div></div></div>
 <div class="imageblock" style=""><img src="images/aurelien.jpeg" alt="aurelien"></div></section>
 <section><section><div class="imageblock" style=""><img src="images/google_codebase.png" alt="google codebase"></div><aside class="notes"><div class="paragraph"><p>Aurelien
-Bazel est donc un outil de build créé par Google, au début pour un usage interne. En effet, il est utilisé, sous un nom different Blaze, depuis plusieurs année sur leur monorepo contenant presque la totalité des projets dévéloppés par Google voir même les dépendances et les outils utiliseé.
-Bien evidemment, Google à mis en place de nombreux outils pour faciliter et rendre possible l&#8217;utilisation d&#8217;un mono repo pour les developpeurs</p></div></aside></section><section id="_chez_google"><h2>🛠 chez Google</h2><div class="ulist column"><ul><li><p>Piper</p></li><li><p>CiTC</p></li><li><p>Critique</p></li><li><p>Codesearch</p></li></ul></div>
+* Gros monorepo chez Google
+* Google à mis en place de nombreux outils pour faciliter et rendre possible l&#8217;utilisation d&#8217;un mono repo pour les developpeurs</p></div></aside></section><section id="_chez_google"><h2>🛠 chez Google</h2><div class="ulist column"><ul><li><p>Piper</p></li><li><p>CiTC</p></li><li><p>Critique</p></li><li><p>Codesearch</p></li></ul></div>
 <div class="ulist column"><ul><li><p>Tricorder</p></li><li><p>Presubmit</p></li><li><p>TAP</p></li><li><p>Rosie</p></li></ul></div>
 <aside class="notes"><div class="paragraph"><p>Aurelien
-Nous avons par exemple ces outils qui on en charge de faciliter l&#8217;utilisation du mono repo chez Google</p></div></aside></section><section class="companies"><div class="imageblock" style=""><img src="images/google.png" alt="google"></div>
+Nous avons par exemple ces outils qui on en charge de faciliter l&#8217;utilisation du mono repo chez Google</p></div></aside></section><section><div class="openblock inline"><div class="content"><div class="imageblock" style=""><img src="images/bazel-old-logo.png" alt="bazel old logo"></div>
+<div class="imageblock" style=""><img src="images/bazel-logo.png" alt="bazel logo"></div></div></div>
+<div class="admonitionblock note"><table><tr><td class="icon"><i class="fa fa-info-circle" title="Note"></i></td><td class="content">2015 - Blaze &#8594; Bazel</td></tr></table></div>
+<aside class="notes"><div class="ulist"><ul><li><p>Créé par Google, au début pour un usage interne.</p></li><li><p>Blaze, depuis plusieurs année sur leur monorepo contenant presque la totalité des projets dévéloppés par Google voir même les dépendances et les outils utiliseé.</p></li></ul></div></aside></section><section class="companies"><div class="imageblock" style=""><img src="images/google.png" alt="google"></div>
 <div class="imageblock" style=""><img src="images/elastic.png" alt="elastic"></div>
 <div class="imageblock" style=""><img src="images/wix.png" alt="wix"></div>
 <div class="imageblock" style=""><img src="images/etsy.png" alt="etsy"></div>
@@ -47,9 +50,7 @@ Nous avons par exemple ces outils qui on en charge de faciliter l&#8217;utilisat
 * google - . blaze
 elastic a fait un poc pour leur offre cloud
 wix a fait une migration de maven vers bazel</p></div></aside></section><section><div class="admonitionblock note"><table><tr><td class="icon"><i class="fa fa-info-circle" title="Note"></i></td><td class="content">Build and test software of any size, quickly and reliably.</td></tr></table></div>
-<aside class="notes"><div class="paragraph"><p>Aurelien
-Et donc l&#8217;une des brique primordial est Bazel. Afin de partir sur des bonnes bases, nous allons définir tout d&#8217;abord
-Parler du remote execution</p></div></aside></section></section>
+<aside class="notes"><div class="ulist"><ul><li><p>petit et gros projet</p></li><li><p>rapidement: cache</p></li><li><p>fiable: detection de changement et le principe des functions pures</p></li></ul></div></aside></section></section>
 <section><section id="_fonctions_pures"><h2>Fonctions pures</h2><pre class="highlight listingblock"><code class="javascript language-javascript">function sum( a:number, b: number): number {
     return a + b;
 }
@@ -62,34 +63,37 @@ function mult( a:number, factor: number): number {
 }
 
 const result = mult( sum(1, 2), 3);</code></pre>
-<aside class="notes"><div class="paragraph"><p>Aurelien</p></div></aside></section><section id="_fonctions_pures_3"><h2>Fonctions pures</h2><div class="imageblock" style=""><img src="images/deps.svg" alt="deps"></div>
+<aside class="notes"><div class="paragraph"><p>Aurelien</p></div></aside></section><section><div class="imageblock" style=""><img src="images/deps-pure/00.png" alt="deps" width="600"></div></section><section><div class="imageblock" style=""><img src="images/deps-pure/01.png" alt="deps" width="600"></div></section><section><div class="imageblock" style=""><img src="images/deps-pure/02.png" alt="deps" width="600"></div></section><section><div class="imageblock" style=""><img src="images/deps-pure/03.png" alt="deps" width="600"></div></section><section><div class="imageblock" style=""><img src="images/deps-pure/04.png" alt="deps" width="600"></div></section><section><div class="imageblock" style=""><img src="images/deps-pure/deps-angular.png" alt="angular" width="600"></div>
+<pre class="highlight listingblock"><code>bazel query "deps(//packages/core:core)" --output=graph | dot -Tpng &gt; graph.png</code></pre>
 <aside class="notes"><div class="paragraph"><p>Aurelien
 - DEMO Presenter le graph du projet angular
 bazel query "deps(//packages/http)" --output graph | dot -Tpng &gt; /tmp/dep.png
 open /tmp/dep.png</p></div></aside></section></section>
-<section><section><div class="imageblock" style=""><img src="images/angular-pr.png" alt="angular pr"></div><aside class="notes"><div class="paragraph"><p>Aurel</p></div></aside></section><section><div class="imageblock" style=""><img src="images/angular.png" alt="angular"></div>
-<aside class="notes"><div class="paragraph"><p>Aurel</p></div></aside></section><section><div class="imageblock" style=""><img src="images/angular-build.png" alt="angular build"></div></section><section><iframe src="https://giphy.com/embed/UrEQirmnMPxBwToULv" width="960" height="540" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
-<aside class="notes"><div class="paragraph"><p>Aurel</p></div>
-<div class="ulist"><ul><li><p>Parler que nous aurions pu faire juste une demo d&#8217;angular avec bazel, mais cela n&#8217;aurait pas permis de comprendre la syntaxe.
+<section><section><div class="imageblock" style=""><img src="images/angular-pr.png" alt="angular pr"></div><aside class="notes"><div class="paragraph"><p>Aurel</p></div></aside></section><section><div class="imageblock" style=""><img src="images/angular-connect.png" alt="angular connect"></div>
+<aside class="notes"></aside></section><section><div class="imageblock" style=""><img src="images/angular.png" alt="angular"></div>
+<aside class="notes"></aside></section><section><div class="imageblock" style=""><img src="images/angular-build.png" alt="angular build"></div></section><section><div class="imageblock" style=""><img src="images/angular/angular-and-bazel.png" alt="angular and bazel"></div>
+<pre class="highlight listingblock"><code>npm run ng add @angular/bazel</code></pre></section><section><iframe src="https://giphy.com/embed/UrEQirmnMPxBwToULv" width="960" height="540" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+<aside class="notes"><div class="ulist"><ul><li><p>Parler que nous aurions pu faire juste une demo d&#8217;angular avec bazel, mais cela n&#8217;aurait pas permis de comprendre la syntaxe.
 Mais faire tout de meme une demo d&#8217;angular cli avec le support Bazel pour montrer le support et le fait que cela ne change rien pour l&#8217;utilisateur</p></li></ul></div>
 <hr>
-<div class="paragraph"><p>ng new . &#8230;&#8203;
+<div class="paragraph"><p>npx @angular/cli new . &#8230;&#8203;
+npm run build
 git add . git commit
 ng add @angular/bazel
 git diff
 ---</p></div>
-<div class="ulist"><ul><li><p>executer deux fois pour voir le temps d&#8217;execution</p></li></ul></div></aside></section><section><div class="ulist"><ul><li><p>image apres le <code>ng add @angular/bazel</code></p></li></ul></div></section><section><div class="ulist"><ul><li><p>image diff deux build</p></li></ul></div></section><section><div class="ulist"><ul><li><p>avec juste un changement de style :)</p></li></ul></div></section></section>
+<div class="ulist"><ul><li><p>executer deux fois pour voir le temps d&#8217;execution</p></li></ul></div></aside></section><section><div class="imageblock" style=""><img src="images/angular/ng-build-bazel.png" alt="ng build bazel"></div></section><section><div class="imageblock" style=""><img src="images/angular/ng-build-bazel-style.png" alt="ng build bazel style"></div></section></section>
 <section><div class="admonitionblock note"><table><tr><td class="icon"><i class="fa fa-info-circle" title="Note"></i></td><td class="content">Il faut voir Bazel comme un orchestrateur, et non comme un nouvel outil de build à apprendre</td></tr></table></div>
 <aside class="notes"></aside></section>
 <section id="_multi_langage"><h2>🇫🇷 Multi Langage</h2><div class="ulist column"><ul><li><p>Android</p></li><li><p>C / C++</p></li><li><p>C#</p></li><li><p>Docker</p></li><li><p>Go</p></li><li><p>Groovy</p></li></ul></div>
-<div class="ulist column"><ul><li><p>Kotlin</p></li><li><p>iOS</p></li><li><p>Java</p></li><li><p>Javascript</p></li><li><p>Perl</p></li><li><p>Rust</p></li></ul></div>
-<div class="ulist column"><ul><li><p>Python</p></li><li><p>Ruby</p></li><li><p>Rust</p></li><li><p>Sass</p></li><li><p>Typescript</p></li><li><p>&#8230;&#8203;</p></li></ul></div>
+<div class="ulist column"><ul><li><p>Kotlin</p></li><li><p>iOS</p></li><li><p>Java</p></li><li><p>Javascript</p></li><li><p>Perl</p></li><li><p>Python</p></li></ul></div>
+<div class="ulist column"><ul><li><p>Ruby</p></li><li><p>Rust</p></li><li><p>Sass</p></li><li><p>Shell</p></li><li><p>Typescript</p></li><li><p>&#8230;&#8203;</p></li></ul></div>
 <aside class="notes"><div class="paragraph"><p>Parler d&#8217;extensibilite.
 faut indiquer que certains des languages sont supportés par défaut.</p></div></aside></section>
 <section id="_getting_started"><h2>Getting Started</h2><iframe src="https://giphy.com/embed/1BFGiiHYS2dAbC0Lx1" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 <aside class="notes"><div class="paragraph"><p>TODO:
 - Parler de la granularité a utiliser. comme mave ? ou une granulatie plus petite. on gagne en performance, mais on perd en maintenabilite</p></div></aside></section>
-<section id="_starlark"><h2>Starlark</h2><pre class="highlight listingblock"><code class="python language-python">def fizz_buzz(n):
+<section><section id="_starlark"><h2>Starlark</h2><pre class="highlight listingblock"><code class="python language-python">def fizz_buzz(n):
   """Print Fizz Buzz numbers from 1 to n."""
   for i in range(1, n + 1):
     s = ""
@@ -99,12 +103,9 @@ faut indiquer que certains des languages sont supportés par défaut.</p></div><
       s += "Buzz"
     print(s if s else i)
 
-fizz_buzz(20)</code></pre>
-<aside class="notes"></aside></section>
-<section id="_différence_avec_python"><h2>Différence avec Python</h2><div class="ulist"><ul><li class="fragment"><p>Les variables globales sont immutables</p></li><li class="fragment"><p>Les <code>for</code> et <code>if</code> utilisables que dans des fonctions</p></li><li class="fragment"><p>Recursion impossible</p></li><li class="fragment"><p>Modifier une collection pendant une itération</p></li><li class="fragment"><p>Les <code>class</code> et <code>import</code> non supportés (<code>struct</code> et <code>load</code>).</p></li><li class="fragment"><p>Les <code>string</code> sont entre double quotes</p></li><li class="fragment"><p>&#8230;&#8203;</p></li></ul></div>
+fizz_buzz(20)</code></pre><aside class="notes"></aside></section><section id="_différence_avec_python"><h2>Différence avec Python</h2><div class="ulist"><ul><li class="fragment"><p>Les variables globales sont immutables</p></li><li class="fragment"><p>Les <code>for</code> et <code>if</code> utilisables que dans des fonctions</p></li><li class="fragment"><p>Recursion impossible</p></li><li class="fragment"><p>Modifier une collection pendant une itération</p></li><li class="fragment"><p>Les <code>class</code> et <code>import</code> non supportés (<code>struct</code> et <code>load</code>).</p></li><li class="fragment"><p>Les <code>string</code> sont entre double quotes</p></li><li class="fragment"><p>&#8230;&#8203;</p></li></ul></div>
 <aside class="notes"><div class="paragraph"><p>TODO:
-- Mettre le contenu d&#8217;un fichier bzl. Pour montrer que c&#8217;est tres complique et que nous allons preferer utiliser des rules predefinies</p></div></aside></section>
-<section id="_différence_avec_python_2" class="hidden-title"><h2>Différence avec Python</h2><pre class="highlight listingblock fullscreen"><code class="python language-python">"""Used for compilation by the different implementations of build_defs.bzl.
+- Mettre le contenu d&#8217;un fichier bzl. Pour montrer que c&#8217;est tres complique et que nous allons preferer utiliser des rules predefinies</p></div></aside></section><section id="_différence_avec_python_2" class="hidden-title"><h2>Différence avec Python</h2><pre class="highlight listingblock fullscreen"><code class="python language-python">"""Used for compilation by the different implementations of build_defs.bzl.
 """
 
 load(":common/json_marshal.bzl", "json_marshal")
@@ -615,46 +616,49 @@ def ts_providers_dict_to_struct(d):
     for key, value in d.items():
         if key != "output_groups" and type(value) == type({}):
             d[key] = struct(**value)
-    return struct(**d)</code></pre></section>
-<section id="_terminologie" class="list-without-style hidden-title two-em"><h2>Terminologie</h2><div class="ulist"><ul><li class="fragment"><p>Workspace</p></li><li class="fragment"><p>Package</p></li></ul></div>
-<aside class="notes"></aside></section>
-<section id="_getting_started_2" class="hidden-title"><h2>Getting Started</h2><div class="imageblock" style=""><img src="images/structure.png" alt="structure" width="600" height="600"></div></section>
-<section id="_terminologie_2" class="list-without-style hidden-title two-em"><h2>Terminologie</h2><div class="ulist"><ul><li class="fragment"><p>Rule</p></li><li class="fragment"><p>Target</p></li></ul></div>
-<aside class="notes"></aside></section>
-<section id="_utiliser_une_rule"><h2>Utiliser une rule</h2><pre class="highlight listingblock"><code class="python language-python">genrule(
+    return struct(**d)</code></pre></section></section>
+<section><section id="_workspace_package"><h2>Workspace / Package</h2></section><section class="hidden-title"><div class="imageblock" style=""><img src="images/monoreposgoogle.png" alt="structure" width="600" height="600"></div></section><section><pre class="highlight listingblock"><code class="python language-python">// WORKSPACE
+http_archive(
+    name = "build_bazel_rules_nodejs",
+    sha256 = "1249a60f88e4c0a46d78de06be04d3d41e7421dcfa0c956de65309a7b7ecf6f4",
+    urls = ["https://github.com/bazelbuild/rules_nodejs/releases/download/0.38.0/rules_nodejs-0.38.0.tar.gz"],
+)</code></pre></section></section>
+<section><section id="_rule_target"><h2>Rule / Target</h2></section><section id="_utiliser_une_rule"><h2>Utiliser une rule</h2><pre class="highlight listingblock"><code class="python language-python">// BUILD.bazel
+genrule(
     srcs = [ ... ],
     outs = [ ... ],
     cmd = " ... ",
 )</code></pre>
 <aside class="notes"><div class="paragraph"><p>TODO:
-- appeler gen_rule</p></div></aside></section>
-<section id="_créer_une_target"><h2>Créer une target</h2><pre class="highlight listingblock"><code class="python language-python">genrule(
+- appeler gen_rule</p></div></aside></section><section id="_créer_une_target"><h2>Créer une target</h2><pre class="highlight listingblock"><code class="python language-python">// BUILD.bazel
+genrule(
     name = "copy-file",
     srcs = [ ... ],
     outs = [ ... ],
     cmd = " ... ",
 )</code></pre>
 <aside class="notes"><div class="paragraph"><p>TODO:
-- appeler gen_rule</p></div></aside></section>
-<section><section id="_les_labels"><h2>Les labels</h2><div class="paragraph"><p>Un label correspond à</p></div><div class="ulist"><ul><li><p>un fichier</p></li><li><p>une target</p></li></ul></div></section><section id="_les_labels_2"><h2>Les labels</h2><div class="ulist"><ul><li><p>//foo/bar:wiz</p></li><li><p>//foo/bar</p></li><li><p>//foo/bar:all</p></li><li><p>//foo/&#8230;&#8203;</p></li></ul></div>
-<aside class="notes"></aside></section><section id="_les_labels_3"><h2>Les labels</h2><div class="paragraph"><p>Si je suis dans le répertoire <code>foo</code></p></div>
-<div class="ulist"><ul><li><p>:foo == //foo:foo.</p></li><li><p>bar:wiz == //foo/bar:wiz.</p></li><li><p>bar/wiz == //foo/bar/wiz:wiz.</p></li></ul></div>
+- appeler gen_rule</p></div></aside></section></section>
+<section><section id="_les_labels"><h2>Les labels</h2><div class="paragraph"><p>Un label correspond à</p></div><div class="ulist"><ul><li><p>un fichier</p></li><li><p>une target</p></li></ul></div></section><section id="_les_labels_2"><h2>Les labels</h2><div class="ulist"><ul><li><p>//gcp/finance:front</p></li><li><p>//gcp/finance</p></li><li><p>//gcp/finance:all</p></li><li><p>//gcp/&#8230;&#8203;</p></li></ul></div>
+<aside class="notes"></aside></section><section id="_les_labels_3"><h2>Les labels</h2><div class="paragraph"><p>Si je suis dans le répertoire <code>gcp</code></p></div>
+<div class="ulist"><ul><li><p>:all == //gcp:all</p></li><li><p>finance:front == //gcp/finance:front</p></li></ul></div>
 <aside class="notes"></aside></section></section>
-<section id="_créer_une_target_2"><h2>Créer une target</h2><pre class="highlight listingblock"><code class="python language-python">// //nestjs/BUILD.bazel
+<section id="_créer_une_target_2"><h2>Créer une target</h2><pre class="highlight listingblock"><code class="python language-python">// //gcp/BUILD.bazel
 genrule(
     name = "copy-file",
     srcs = [
         "//angular:README.md",
     ],
-    outs = ["README-nestjs.md"],
+    outs = ["README-gcp.md"],
     cmd = "cp $&lt; $@",
 )</code></pre></section>
-<section id="_dépendances"><h2>Dépendances</h2><pre class="highlight listingblock"><code class="python language-python">genrule(
+<section id="_dépendances"><h2>Dépendances</h2><pre class="highlight listingblock"><code class="python language-python">// //gcp/BUILD.bazel
+genrule(
     name = "copy-file",
     srcs = [
         "//angular:README.md",
     ],
-    outs = ["README-nestjs.md"],
+    outs = ["README-gcp.md"],
     cmd = "cp $&lt; $@",
 )
 
@@ -668,31 +672,30 @@ genrule(
 )</code></pre>
 <aside class="notes"><div class="paragraph"><p>TODO:
 - appeler gen_rule apres une autre genrule pour montrer la dependances</p></div></aside></section>
-<section id="_macro"><h2>Macro</h2><pre class="highlight listingblock"><code class="python language-python">// //:rules.bzl
-def my_macro(name, **kwargs):
+<section><section id="_macro"><h2>Macro</h2><pre class="highlight listingblock"><code class="python language-python">// //:rules.bzl
+def generate_final_txt(name, **kwargs):
     genrule(
         name = "%s_first" % name,
         srcs = [
             "//angular:README.md",
         ],
-        outs = ["README-nestjs.md"],
+        outs = ["README-gcp.md"],
         cmd = "cp $&lt; $@",
     )
 
     genrule(
         name = name,
         **kwargs
-    )</code></pre></section>
-<section id="_macro_2"><h2>Macro</h2><pre class="highlight listingblock"><code class="python language-python">load("//:rules.bzl", "my_macro")
+    )</code></pre></section><section id="_macro_2"><h2>Macro</h2><pre class="highlight listingblock"><code class="python language-python">load("//:rules.bzl", "generate_final_txt")
 
-my_macro(
+generate_final_txt(
     name = "concat",
     srcs = [
         "copy-file", "//:LICENCE",
     ],
     outs = ["final.txt"],
     cmd = "cat $(locations //copy-file) $(location //some:file2) &gt; $@"
-)</code></pre></section>
+)</code></pre></section></section>
 <section id="_custom_rules"><h2>Custom rules</h2><pre class="highlight listingblock"><code class="python language-python">def ts_binary_impl(ctx):
   files = list(get_transitive_files(ctx))
   output = ctx.outputs.out
@@ -711,8 +714,7 @@ ts_binary = rule(
       "flags": attr.string_list(),
   },
   outputs = {"out": "%{name}.js"},
-)]</code></pre>
-<aside class="notes"></aside></section>
+)]</code></pre></section>
 <section><iframe src="https://giphy.com/embed/uhb1F8ebDgkzC" width="960" height="540" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 <aside class="notes"><div class="paragraph"><p>TODO:
 Manu
@@ -724,7 +726,7 @@ Manu
 revenir sur le code angulkar pour expliquer les fichiers build genere
 <a href="https://dev.to/jakeherringbone/layering-in-bazel-for-web-389h" class="bare">https://dev.to/jakeherringbone/layering-in-bazel-for-web-389h</a>
 presentation de ibazel</p></div>
-<div class="paragraph"><p>DEmo angular d&#8217;aurelien</p></div>
+<div class="paragraph"><p>Demo angular d&#8217;aurelien</p></div>
 <div class="paragraph"><p>Demo rule node Manu</p></div></aside></section>
 <section id="_conclusion" class="hidden-title"><h2>Conclusion</h2><div class="imageblock" style=""><img src="images/release.png" alt="release" width="600" height="600"></div>
 <aside class="notes"><div class="paragraph"><p>Manu
@@ -740,7 +742,8 @@ Syntaxe a simplifier
 Documentation
 Creer de l&#8217;outillage pour faciliter la migraton. Un plugin existe deja pour migrer maven, et gazelle pour le monde nodejs
 Regarder le projet angular. extraire le fichier BUILD</p></div></aside></section>
-<section id="_pour_aller_plus_loin"><h2>Pour aller plus loin</h2><div class="ulist"><ul><li><p><a href="https://www.youtube.com/watch?v=2UOFm-Cc_cU">Migration Maven / Gradle vers Bazel</a></p></li></ul></div></section></div></div><script src="https://cdn.rawgit.com/hakimel/reveal.js/3.8.0//lib/js/head.min.js"></script><script src="https://cdn.rawgit.com/hakimel/reveal.js/3.8.0//js/reveal.js"></script><script>Array.prototype.slice.call(document.querySelectorAll('.slides section')).forEach(function(slide) {
+<section id="_pour_aller_plus_loin"><h2>Pour aller plus loin</h2><div class="ulist"><ul><li><p><a href="https://www.youtube.com/watch?v=2UOFm-Cc_cU">Migration Maven / Gradle vers Bazel</a></p></li></ul></div></section>
+<section id="_merci"><h2>Merci 🙏</h2><div class="paragraph"><p>@EmmanuelDemey | @AurelienLoyer</p></div></section></div></div><script src="https://cdn.rawgit.com/hakimel/reveal.js/3.8.0//lib/js/head.min.js"></script><script src="https://cdn.rawgit.com/hakimel/reveal.js/3.8.0//js/reveal.js"></script><script>Array.prototype.slice.call(document.querySelectorAll('.slides section')).forEach(function(slide) {
   if (slide.getAttribute('data-background-color')) return;
   // user needs to explicitly say he wants CSS color to override otherwise we might break custom css or theme (#226)
   if (!(slide.classList.contains('canvas') || slide.classList.contains('background'))) return;

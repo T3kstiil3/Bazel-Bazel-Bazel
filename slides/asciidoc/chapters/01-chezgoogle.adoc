@@ -5,10 +5,9 @@ image::google_codebase.png[]
 [.notes]
 --
 Aurelien
-Bazel est donc un outil de build créé par Google, au début pour un usage interne. En effet, il est utilisé, sous un nom different Blaze, depuis plusieurs année sur leur monorepo contenant presque la totalité des projets dévéloppés par Google voir même les dépendances et les outils utiliseé. 
-Bien evidemment, Google à mis en place de nombreux outils pour faciliter et rendre possible l'utilisation d'un mono repo pour les developpeurs
+* Gros monorepo chez Google
+* Google à mis en place de nombreux outils pour faciliter et rendre possible l'utilisation d'un mono repo pour les developpeurs
 --
-
 
 === 🛠 chez Google
 
@@ -28,6 +27,22 @@ Bien evidemment, Google à mis en place de nombreux outils pour faciliter et ren
 --
 Aurelien
 Nous avons par exemple ces outils qui on en charge de faciliter l'utilisation du mono repo chez Google
+--
+
+=== !
+
+[.inline]
+--
+image::bazel-old-logo.png[]
+image::bazel-logo.png[]
+--
+
+NOTE: 2015 - Blaze -> Bazel
+
+[.notes]
+--
+* Créé par Google, au début pour un usage interne. 
+* Blaze, depuis plusieurs année sur leur monorepo contenant presque la totalité des projets dévéloppés par Google voir même les dépendances et les outils utiliseé. 
 --
 
 [.companies]
@@ -54,7 +69,7 @@ NOTE: Build and test software of any size, quickly and reliably.
 
 [.notes]
 --
-Aurelien
-Et donc l'une des brique primordial est Bazel. Afin de partir sur des bonnes bases, nous allons définir tout d'abord 
-Parler du remote execution
+* petit et gros projet
+* rapidement: cache
+* fiable: detection de changement et le principe des functions pures
 --
