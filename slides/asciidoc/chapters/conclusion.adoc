@@ -23,4 +23,8 @@ Regarder le projet angular. extraire le fichier BUILD
 
 == Pour aller plus loin 
 
+- https://bazel.build/[Bazel website]
 - https://www.youtube.com/watch?v=2UOFm-Cc_cU[Migration Maven / Gradle vers Bazel]
+- https://www.youtube.com/watch?v=3VhyGhTWP9I[A la découverte de Bazel]
+- https://www.youtube.com/watch?v=DTvXa-iqrfA[Streamlining Kubernetes Application CI/CD with Bazel]
+- https://www.youtube.com/watch?v=yBg9zG6ZGb4[Building Large Angular Apps With Bazel]

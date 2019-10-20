@@ -23,7 +23,7 @@ image::angular.png[]
 --
 --
 
-=== !
+=== Differential loading
 
 image::angular-build.png[]
 

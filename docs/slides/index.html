@@ -71,7 +71,7 @@ bazel query "deps(//packages/http)" --output graph | dot -Tpng &gt; /tmp/dep.png
 open /tmp/dep.png</p></div></aside></section></section>
 <section><section><div class="imageblock" style=""><img src="images/angular-pr.png" alt="angular pr"></div><aside class="notes"><div class="paragraph"><p>Aurel</p></div></aside></section><section><div class="imageblock" style=""><img src="images/angular-connect.png" alt="angular connect"></div>
 <aside class="notes"></aside></section><section><div class="imageblock" style=""><img src="images/angular.png" alt="angular"></div>
-<aside class="notes"></aside></section><section><div class="imageblock" style=""><img src="images/angular-build.png" alt="angular build"></div></section><section><div class="imageblock" style=""><img src="images/angular/angular-and-bazel.png" alt="angular and bazel"></div>
+<aside class="notes"></aside></section><section id="_differential_loading"><h2>Differential loading</h2><div class="imageblock" style=""><img src="images/angular-build.png" alt="angular build"></div></section><section><div class="imageblock" style=""><img src="images/angular/angular-and-bazel.png" alt="angular and bazel"></div>
 <pre class="highlight listingblock"><code>npm run ng add @angular/bazel</code></pre></section><section><iframe src="https://giphy.com/embed/UrEQirmnMPxBwToULv" width="960" height="540" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 <aside class="notes"><div class="ulist"><ul><li><p>Parler que nous aurions pu faire juste une demo d&#8217;angular avec bazel, mais cela n&#8217;aurait pas permis de comprendre la syntaxe.
 Mais faire tout de meme une demo d&#8217;angular cli avec le support Bazel pour montrer le support et le fait que cela ne change rien pour l&#8217;utilisateur</p></li></ul></div>
@@ -742,7 +742,7 @@ Syntaxe a simplifier
 Documentation
 Creer de l&#8217;outillage pour faciliter la migraton. Un plugin existe deja pour migrer maven, et gazelle pour le monde nodejs
 Regarder le projet angular. extraire le fichier BUILD</p></div></aside></section>
-<section id="_pour_aller_plus_loin"><h2>Pour aller plus loin</h2><div class="ulist"><ul><li><p><a href="https://www.youtube.com/watch?v=2UOFm-Cc_cU">Migration Maven / Gradle vers Bazel</a></p></li></ul></div></section>
+<section id="_pour_aller_plus_loin"><h2>Pour aller plus loin</h2><div class="ulist"><ul><li><p><a href="https://bazel.build/">Bazel website</a></p></li><li><p><a href="https://www.youtube.com/watch?v=2UOFm-Cc_cU">Migration Maven / Gradle vers Bazel</a></p></li><li><p><a href="https://www.youtube.com/watch?v=3VhyGhTWP9I">A la découverte de Bazel</a></p></li><li><p><a href="https://www.youtube.com/watch?v=DTvXa-iqrfA">Streamlining Kubernetes Application CI/CD with Bazel</a></p></li><li><p><a href="https://www.youtube.com/watch?v=yBg9zG6ZGb4">Building Large Angular Apps With Bazel</a></p></li></ul></div></section>
 <section id="_merci"><h2>Merci 🙏</h2><div class="paragraph"><p>@EmmanuelDemey | @AurelienLoyer</p></div></section></div></div><script src="https://cdn.rawgit.com/hakimel/reveal.js/3.8.0//lib/js/head.min.js"></script><script src="https://cdn.rawgit.com/hakimel/reveal.js/3.8.0//js/reveal.js"></script><script>Array.prototype.slice.call(document.querySelectorAll('.slides section')).forEach(function(slide) {
   if (slide.getAttribute('data-background-color')) return;
   // user needs to explicitly say he wants CSS color to override otherwise we might break custom css or theme (#226)
