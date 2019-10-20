@@ -511,3 +511,5 @@ def ts_providers_dict_to_struct(d):
         if key != "output_groups" and type(value) == type({}):
             d[key] = struct(**value)
     return struct(**d)
+
+----

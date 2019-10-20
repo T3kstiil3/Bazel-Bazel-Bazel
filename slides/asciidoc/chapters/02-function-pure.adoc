@@ -33,9 +33,35 @@ const result = mult( sum(1, 2), 3);
 Aurelien
 --
 
-=== Fonctions pures
+=== !
 
-image::deps.svg[]
+// image::deps-pure/deps.svg[]
+image::deps-pure/00.png[deps,600]
+
+=== !
+
+image::deps-pure/01.png[deps,600]
+
+=== !
+
+image::deps-pure/02.png[deps,600]
+
+=== !
+
+image::deps-pure/03.png[deps,600]
+
+=== !
+
+image::deps-pure/04.png[deps,600]
+
+=== !
+
+image::deps-pure/deps-angular.png[angular, 600]
+
+[source]
+--
+bazel query "deps(//packages/core:core)" --output=graph | dot -Tpng > graph.png
+--
 
 [.notes]
 --

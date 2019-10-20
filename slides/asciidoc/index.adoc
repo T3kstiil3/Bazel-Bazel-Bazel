@@ -21,10 +21,13 @@ ifndef::imagesdir[:imagesdir: images]
 --
 Aurelien
 
-Nous sommes à une epoque ou la taille de nos projet est de plus en grande, le nombre de dependances grossit de jour en jour, ou encore la duree d'un build et de nots tests sont trop long pour avoir un feedback rapidement. parler de lInner source . ous ne sommes pas les seuls a avoir ce problème. En effet, des grosses sociétes se sont penchés sur le sujet, et notamment Google qui propose ... 
-
-- inner sourcing
-- Bonne idée de parler de Qima
+* Epoque ou la taille de nos projet est de plus en grande
+* Le nombre de dependances grossit de jour en jour
+* Duree d'un build et des tests sont trop long pour avoir un feedback rapidement. 
+* Inner source 
+* Problème connu
+* En effet, des grosses sociétes se sont penchés sur le sujet, et notamment Google qui propose ...  
+* Bonne idée de parler de Qima
 
 --
 
@@ -38,39 +41,13 @@ Aurelien
 l'outil open-source Bazel que nous allons vous présenter aujourd'hui
 --
 
-[.speaker]
-== !
+include::chapters/00-speakers.adoc[]
 
-[id="speaker-bio"]
---
-Emmanuel DEMEY
+include::chapters/01-chezgoogle.adoc[]
 
-Developer Advocate à Zenika Lille 
+include::chapters/02-function-pure.adoc[]
 
-@EmmanuelDemey
---
-
-image::emmanuel.jpg[]
-
-[.speaker]
-== !
-
-[id="speaker-bio"]
---
-Aurélien LOYER
-
-Consultant à Zenika Lille 
-
-@AurelienDemey
---
-
-image::aurelien.jpeg[]
-
-include::chapters/chezgoogle.adoc[]
-
-include::chapters/function-pure.adoc[]
-
-include::chapters/angular.adoc[]
+include::chapters/03-angular.adoc[]
 
 == !
 
@@ -96,13 +73,13 @@ NOTE: Il faut voir Bazel comme un orchestrateur, et non comme un nouvel outil de
 * Java
 * Javascript
 * Perl
-* Rust
+* Python
 
 [.column]
-* Python
 * Ruby
 * Rust
 * Sass
+* Shell
 * Typescript
 * ...
 
@@ -124,72 +101,17 @@ TODO:
 - Parler de la granularité a utiliser. comme mave ? ou une granulatie plus petite. on gagne en performance, mais on perd en maintenabilite
 --
 
-== Starlark
+include::chapters/starlark.adoc[]
 
-[source,python]
-----
-def fizz_buzz(n):
-  """Print Fizz Buzz numbers from 1 to n."""
-  for i in range(1, n + 1):
-    s = ""
-    if i % 3 == 0:
-      s += "Fizz"
-    if i % 5 == 0:
-      s += "Buzz"
-    print(s if s else i)
-
-fizz_buzz(20)
-----
-
-[.notes]
---
---
-
-== Différence avec Python
-
-[%step]
-* Les variables globales sont immutables
-* Les `for` et `if` utilisables que dans des fonctions
-* Recursion impossible
-* Modifier une collection pendant une itération
-* Les `class` et `import` non supportés (`struct` et `load`).
-* Les `string` sont entre double quotes
-* ...
-
-
-[.notes]
---
-TODO: 
-- Mettre le contenu d'un fichier bzl. Pour montrer que c'est tres complique et que nous allons preferer utiliser des rules predefinies
---
+== Workspace / Package
 
 [.hidden-title]
-== Différence avec Python
-
-[.fullscreen]
-[source,python]
-include::starlark[]
-----
-
-[.list-without-style.hidden-title.two-em]
-== Terminologie
-
-* Workspace
-* Package
-
-[.notes]
---
---
-
-[.hidden-title]
-== Getting Started
+=== !
 
 image::monoreposgoogle.png[structure,600,600]
 
-[.list-without-style.hidden-title.two-em]
-== Workspace
+=== !
 
-[.fullscreen]
 [source,python]
 ----
 // WORKSPACE
@@ -200,21 +122,9 @@ http_archive(
 )
 ----
 
-[.notes]
---
---
+== Rule / Target
 
-[.list-without-style.hidden-title.two-em]
-== Terminologie
-
-* Rule
-* Target
-
-[.notes]
---
---
-
-== Utiliser une rule
+=== Utiliser une rule
 
 [source,python]
 ----
@@ -232,7 +142,7 @@ TODO:
 - appeler gen_rule
 --
 
-== Créer une target
+=== Créer une target
 
 [source,python]
 ----
@@ -346,7 +256,7 @@ def generate_final_txt(name, **kwargs):
     )
 ----
 
-== Macro
+=== Macro
 
 [source,python]
 ----
@@ -387,57 +297,8 @@ ts_binary = rule(
 )]
 ----
 
-[.notes]
---
---
+include::chapters/demo.adoc[]
 
-== !
+include::chapters/conclusion.adoc[]
 
-++++
-<iframe src="https://giphy.com/embed/uhb1F8ebDgkzC" width="960" height="540" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
-++++
-
-[.notes]
---
-TODO:
-Manu
-- /Users/emmanueldemey/Documents/workspaces/oss/rules_nodejs/packages/labs/src/protobufjs/ts_proto_library.bzls
-- Parler que nous pouvons définir des variabls privées
-- Parler de l'outillage
-    - Parler du beautifuer
-    - Parler des extensions VSCode
-revenir sur le code angulkar pour expliquer les fichiers build genere
-https://dev.to/jakeherringbone/layering-in-bazel-for-web-389h
-presentation de ibazel
-
-DEmo angular d'aurelien
-
-Demo rule node Manu
---
-
-[.hidden-title]
-== Conclusion
-
-image::release.png[release,600,600]
-
-[.notes]
---
-Manu
-TODO: 
-- Ajouter un diff GIT pour montrer les fichiers ajoutés
-- Support dans Angular CLI 
-- Builder en remote avec plus core 
-Ce n'est pas pour tout le monde
-Pour un startup ou un nouveau projet, ne pas choisir bazel
-Choisir une solution historique. si le projet grossit, eventuellement .
-
-Ecosysteme plus large
-Syntaxe a simplifier 
-Documentation
-Creer de l'outillage pour faciliter la migraton. Un plugin existe deja pour migrer maven, et gazelle pour le monde nodejs
-Regarder le projet angular. extraire le fichier BUILD
---
-
-== Pour aller plus loin 
-
-- https://www.youtube.com/watch?v=2UOFm-Cc_cU[Migration Maven / Gradle vers Bazel]
+include::chapters/thanks.adoc[]
