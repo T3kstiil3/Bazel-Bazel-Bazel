@@ -58,7 +58,7 @@ image::deps-pure/04.png[deps,600]
 
 image::deps-pure/deps-angular.png[angular, 600]
 
-[source]
+[source,shell]
 --
 bazel query "deps(//packages/core:core)" --output=graph | dot -Tpng > graph.png
 --

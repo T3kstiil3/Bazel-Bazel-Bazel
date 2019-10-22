@@ -21,7 +21,7 @@ Aurélien LOYER
 
 Consultant à Zenika Lille 
 
-@AurelienDemey
+@AurelienLoyer
 --
 
 image::aurelien.jpeg[]
