@@ -13,6 +13,7 @@ ifndef::imagesdir[:imagesdir: images]
 :title-slide-transition-speed: fast
 :icons: font
 :revealjs_history: true
+:source-highlighter: highlightjs
 
 [.black.background]
 == !
@@ -20,15 +21,6 @@ ifndef::imagesdir[:imagesdir: images]
 [.notes]
 --
 Aurelien
-
-* Epoque ou la taille de nos projet est de plus en grande
-* Le nombre de dependances grossit de jour en jour
-* Duree d'un build et des tests sont trop long pour avoir un feedback rapidement. 
-* Inner source 
-* Problème connu
-* En effet, des grosses sociétes se sont penchés sur le sujet, et notamment Google qui propose ...  
-* Bonne idée de parler de Qima
-
 --
 
 == !
@@ -38,7 +30,6 @@ image::bazel.png[]
 [.notes]
 --
 Aurelien
-l'outil open-source Bazel que nous allons vous présenter aujourd'hui
 --
 
 include::chapters/00-speakers.adoc[]
@@ -85,8 +76,7 @@ NOTE: Il faut voir Bazel comme un orchestrateur, et non comme un nouvel outil de
 
 [.notes]
 --
-Parler d'extensibilite. 
-faut indiquer que certains des languages sont supportés par défaut. 
+Parler d'extensibilite. Indiquer que certains des languages sont supportés par défaut. 
 --
 
 == Getting Started

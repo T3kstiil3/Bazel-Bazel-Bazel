@@ -31,7 +31,7 @@ image::angular-build.png[]
 
 image::angular/angular-and-bazel.png[]
 
-[source]
+[source,shell]
 ----
 npm run ng add @angular/bazel
 ----
