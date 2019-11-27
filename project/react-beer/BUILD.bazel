@@ -1,0 +1,48 @@
+load("@build_bazel_rules_nodejs//:defs.bzl", "http_server", "rollup_bundle")
+load("@build_bazel_rules_nodejs//internal/web_package:web_package.bzl", "web_package")
+load("@npm_bazel_typescript//:index.bzl", "ts_library")
+
+exports_files(["tsconfig.json"])
+
+# Compile
+ts_library(
+    name = "app",
+    srcs = glob([
+        "*.ts",
+        "*.tsx",
+    ]),
+    deps = [
+        "//layout",
+        "@npm//@types/react",
+        "@npm//@types/react-dom",
+    ],
+)
+
+# Assemble
+rollup_bundle(
+    name = "bundle",
+    enable_code_splitting = False,
+    entry_point = ":app.ts",
+    deps = [
+        ":app",
+        "@npm//react",
+        "@npm//react-dom",
+    ],
+)
+
+# Package
+web_package(
+    name = "package",
+    assets = [
+        ":bundle.min.js",
+        ":bundle.min.es2015.js",
+    ],
+    index_html = "index.html",
+)
+
+# Serve
+http_server(
+    name = "prodserver",
+    data = [":package"],
+    templated_args = ["package"],
+)
