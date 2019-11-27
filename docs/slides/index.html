@@ -69,8 +69,9 @@ bazel query "deps(//packages/http)" --output graph | dot -Tpng &gt; /tmp/dep.png
 open /tmp/dep.png</p></div></aside></section></section>
 <section><section><div class="imageblock" style=""><img src="images/angular-pr.png" alt="angular pr"></div><aside class="notes"><div class="paragraph"><p>Aurel</p></div></aside></section><section><div class="imageblock" style=""><img src="images/angular-connect.png" alt="angular connect"></div>
 <aside class="notes"></aside></section><section><div class="imageblock" style=""><img src="images/angular.png" alt="angular"></div>
-<aside class="notes"></aside></section><section id="_differential_loading"><h2>Differential loading</h2><div class="imageblock" style=""><img src="images/angular-build.png" alt="angular build"></div></section><section><div class="imageblock" style=""><img src="images/angular/angular-and-bazel.png" alt="angular and bazel"></div>
-<pre class="highlight listingblock"><code data-noescape class="shell language-shell">npm run ng add @angular/bazel</code></pre></section><section><iframe src="https://giphy.com/embed/UrEQirmnMPxBwToULv" width="960" height="540" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+<aside class="notes"></aside></section><section><div class="imageblock" style=""><img src="images/angular/angular-and-bazel.png" alt="angular and bazel"></div>
+<pre class="highlight listingblock"><code data-noescape class="shell language-shell">npm run ng add @angular/bazel</code></pre>
+<aside class="notes"><div class="paragraph"><p>Il faut dire que c&#8217;est a ce moment la que nous avons voulu regarder Bazel et comprendre comment cela fonctionner.</p></div></aside></section><section><iframe src="https://giphy.com/embed/UrEQirmnMPxBwToULv" width="960" height="540" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 <aside class="notes"><div class="ulist"><ul><li><p>Parler que nous aurions pu faire juste une demo d&#8217;angular avec bazel, mais cela n&#8217;aurait pas permis de comprendre la syntaxe.
 Mais faire tout de meme une demo d&#8217;angular cli avec le support Bazel pour montrer le support et le fait que cela ne change rien pour l&#8217;utilisateur</p></li></ul></div>
 <hr>
@@ -90,7 +91,7 @@ git diff
 <section id="_getting_started"><h2>Getting Started</h2><iframe src="https://giphy.com/embed/1BFGiiHYS2dAbC0Lx1" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 <aside class="notes"><div class="paragraph"><p>TODO:
 - Parler de la granularité a utiliser. comme mave ? ou une granulatie plus petite. on gagne en performance, mais on perd en maintenabilite</p></div></aside></section>
-<section><section id="_starlark"><h2>Starlark</h2><pre class="highlight listingblock"><code data-noescape class="python language-python">def fizz_buzz(n):
+<section id="_starlark"><h2>Starlark</h2><pre class="highlight listingblock"><code data-noescape class="python language-python">def fizz_buzz(n):
   """Print Fizz Buzz numbers from 1 to n."""
   for i in range(1, n + 1):
     s = ""
@@ -100,9 +101,79 @@ git diff
       s += "Buzz"
     print(s if s else i)
 
-fizz_buzz(20)</code></pre><aside class="notes"></aside></section><section id="_différence_avec_python"><h2>Différence avec Python</h2><div class="ulist"><ul><li class="fragment"><p>Les variables globales sont immutables</p></li><li class="fragment"><p>Les <code>for</code> et <code>if</code> utilisables que dans des fonctions</p></li><li class="fragment"><p>Recursion impossible</p></li><li class="fragment"><p>Modifier une collection pendant une itération</p></li><li class="fragment"><p>Les <code>class</code> et <code>import</code> non supportés (<code>struct</code> et <code>load</code>).</p></li><li class="fragment"><p>Les <code>string</code> sont entre double quotes</p></li><li class="fragment"><p>&#8230;&#8203;</p></li></ul></div>
-<aside class="notes"><div class="paragraph"><p>TODO:
-- Mettre le contenu d&#8217;un fichier bzl. Pour montrer que c&#8217;est tres complique et que nous allons preferer utiliser des rules predefinies</p></div></aside></section><section id="_différence_avec_python_2" class="hidden-title"><h2>Différence avec Python</h2><pre class="highlight listingblock fullscreen"><code data-noescape class="python language-python">"""Used for compilation by the different implementations of build_defs.bzl.
+fizz_buzz(20)</code></pre>
+<aside class="notes"><div class="ulist"><ul><li><p>Les variables globales sont immutables</p></li><li><p>Les <code>for</code> et <code>if</code> utilisables que dans des fonctions</p></li><li><p>Recursion impossible</p></li><li><p>Modifier une collection pendant une itération</p></li><li><p>Les <code>class</code> et <code>import</code> non supportés (<code>struct</code> et <code>load</code>).</p></li><li><p>Les <code>string</code> sont entre double quotes</p></li><li><p>&#8230;&#8203;</p></li></ul></div></aside></section>
+<section><section id="_workspace_package"><h2>Workspace / Package</h2></section><section class="hidden-title"><div class="imageblock" style=""><img src="images/monoreposgoogle.png" alt="structure" width="600" height="600"></div></section><section><pre class="highlight listingblock"><code data-noescape class="python language-python">// WORKSPACE
+http_archive(
+    name = "build_bazel_rules_nodejs",
+    sha256 = "1249a60f88e4c0a46d78de06be04d3d41e7421dcfa0c956de65309a7b7ecf6f4",
+    urls = ["https://github.com/bazelbuild/rules_nodejs/releases/download/0.38.0/rules_nodejs-0.38.0.tar.gz"],
+)</code></pre></section></section>
+<section><section id="_rule_target"><h2>Rule / Target</h2></section><section id="_utiliser_une_rule"><h2>Utiliser une rule</h2><pre class="highlight listingblock"><code data-noescape class="python language-python">// BUILD.bazel
+ts_library(
+    srcs =  [ ... ],
+    deps = [ "..." ],
+)</code></pre></section><section id="_créer_une_target"><h2>Créer une target</h2><pre class="highlight listingblock"><code data-noescape class="python language-python">// BUILD.bazel
+rollup_bundle(
+    name = "bundle",
+    srcs = [ ... ],
+    deps = [ "..." ],
+)</code></pre></section></section>
+<section><section id="_les_labels"><h2>Les labels</h2><div class="paragraph"><p>Un label correspond à</p></div><div class="ulist"><ul><li><p>un fichier</p></li><li><p>une target</p></li></ul></div></section><section id="_les_labels_2"><h2>Les labels</h2><div class="ulist"><ul><li><p>//gcp/finance:front</p></li><li><p>//gcp/finance</p></li><li><p>//gcp/finance:all</p></li><li><p>//gcp/&#8230;&#8203;</p></li></ul></div>
+<aside class="notes"></aside></section><section id="_les_labels_3"><h2>Les labels</h2><div class="paragraph"><p>Si je suis dans le répertoire <code>gcp</code></p></div>
+<div class="ulist"><ul><li><p>:all == //gcp:all</p></li><li><p>finance:front == //gcp/finance:front</p></li></ul></div>
+<aside class="notes"></aside></section></section>
+<section id="_créer_une_target_2"><h2>Créer une target</h2><pre class="highlight listingblock"><code data-noescape class="python language-python">// //library/BUILD.bazel
+ts_library(
+    name = "library",
+    srcs = glob(["*.ts"]),
+    deps = [ "@npm//@types/react" ],
+)</code></pre></section>
+<section id="_dépendances"><h2>Dépendances</h2><pre class="highlight listingblock"><code data-noescape class="python language-python">// //library/BUILD.bazel
+ts_library(
+    name = "library",
+    srcs = glob(["*.ts"]),
+    deps = [ "@npm//@types/react" ],
+)
+
+// //BUILD.bazel
+ts_library(
+    name = "library",
+    srcs = glob(["*.ts"]),
+    deps = [ "//library", "@npm//@types/react" ],
+)</code></pre></section>
+<section><section id="_macro"><h2>Macro</h2><pre class="highlight listingblock"><code data-noescape class="python language-python">// //:rules.bzl
+def compile(name, **kwargs):
+    ts_library(
+        name = name,
+        srcs = glob(["*.ts"]),
+        **kwargs
+    )</code></pre></section><section id="_macro_2"><h2>Macro</h2><pre class="highlight listingblock"><code data-noescape class="python language-python">load("//:rules.bzl", "compile")
+
+compile(
+    name = "library",
+    deps = [ "@npm//@types/react" ]
+)</code></pre></section></section>
+<section id="_custom_rules"><h2>Custom rules</h2><pre class="highlight listingblock"><code data-noescape class="python language-python">def ts_binary_impl(ctx):
+  files = list(get_transitive_files(ctx))
+  output = ctx.outputs.out
+  flags = ' '.join(ctx.attr.flags)
+  ctx.action(
+      inputs=files,
+      outputs=[output],
+      command="tsc %s --out %s %s" % (
+          flags, output.path, ' '.join([f.path for f in files])))
+
+ts_binary = rule(
+  implementation = ts_binary_impl,
+  attrs = {
+      "srcs": attr.label_list(allow_files=ts_filetype),
+      "deps": attr.label_list(allow_files=False),
+      "flags": attr.string_list(),
+  },
+  outputs = {"out": "%{name}.js"},
+)]</code></pre></section>
+<section id="_custom_rules_2"><h2>Custom rules</h2><pre class="highlight listingblock"><code data-noescape>"""Used for compilation by the different implementations of build_defs.bzl.
 """
 
 load(":common/json_marshal.bzl", "json_marshal")
@@ -613,105 +684,7 @@ def ts_providers_dict_to_struct(d):
     for key, value in d.items():
         if key != "output_groups" and type(value) == type({}):
             d[key] = struct(**value)
-    return struct(**d)</code></pre></section></section>
-<section><section id="_workspace_package"><h2>Workspace / Package</h2></section><section class="hidden-title"><div class="imageblock" style=""><img src="images/monoreposgoogle.png" alt="structure" width="600" height="600"></div></section><section><pre class="highlight listingblock"><code data-noescape class="python language-python">// WORKSPACE
-http_archive(
-    name = "build_bazel_rules_nodejs",
-    sha256 = "1249a60f88e4c0a46d78de06be04d3d41e7421dcfa0c956de65309a7b7ecf6f4",
-    urls = ["https://github.com/bazelbuild/rules_nodejs/releases/download/0.38.0/rules_nodejs-0.38.0.tar.gz"],
-)</code></pre></section></section>
-<section><section id="_rule_target"><h2>Rule / Target</h2></section><section id="_utiliser_une_rule"><h2>Utiliser une rule</h2><pre class="highlight listingblock"><code data-noescape class="python language-python">// BUILD.bazel
-genrule(
-    srcs = [ ... ],
-    outs = [ ... ],
-    cmd = " ... ",
-)</code></pre>
-<aside class="notes"><div class="paragraph"><p>TODO:
-- appeler gen_rule</p></div></aside></section><section id="_créer_une_target"><h2>Créer une target</h2><pre class="highlight listingblock"><code data-noescape class="python language-python">// BUILD.bazel
-genrule(
-    name = "copy-file",
-    srcs = [ ... ],
-    outs = [ ... ],
-    cmd = " ... ",
-)</code></pre>
-<aside class="notes"><div class="paragraph"><p>TODO:
-- appeler gen_rule</p></div></aside></section></section>
-<section><section id="_les_labels"><h2>Les labels</h2><div class="paragraph"><p>Un label correspond à</p></div><div class="ulist"><ul><li><p>un fichier</p></li><li><p>une target</p></li></ul></div></section><section id="_les_labels_2"><h2>Les labels</h2><div class="ulist"><ul><li><p>//gcp/finance:front</p></li><li><p>//gcp/finance</p></li><li><p>//gcp/finance:all</p></li><li><p>//gcp/&#8230;&#8203;</p></li></ul></div>
-<aside class="notes"></aside></section><section id="_les_labels_3"><h2>Les labels</h2><div class="paragraph"><p>Si je suis dans le répertoire <code>gcp</code></p></div>
-<div class="ulist"><ul><li><p>:all == //gcp:all</p></li><li><p>finance:front == //gcp/finance:front</p></li></ul></div>
-<aside class="notes"></aside></section></section>
-<section id="_créer_une_target_2"><h2>Créer une target</h2><pre class="highlight listingblock"><code data-noescape class="python language-python">// //gcp/BUILD.bazel
-genrule(
-    name = "copy-file",
-    srcs = [
-        "//angular:README.md",
-    ],
-    outs = ["README-gcp.md"],
-    cmd = "cp $&lt; $@",
-)</code></pre></section>
-<section id="_dépendances"><h2>Dépendances</h2><pre class="highlight listingblock"><code data-noescape class="python language-python">// //gcp/BUILD.bazel
-genrule(
-    name = "copy-file",
-    srcs = [
-        "//angular:README.md",
-    ],
-    outs = ["README-gcp.md"],
-    cmd = "cp $&lt; $@",
-)
-
-genrule(
-    name = "concat",
-    srcs = [
-        "copy-file", "//:LICENCE",
-    ],
-    outs = ["final.txt"],
-    cmd = "cat $(locations //copy-file) $(location //some:file2) &gt; $@",
-)</code></pre>
-<aside class="notes"><div class="paragraph"><p>TODO:
-- appeler gen_rule apres une autre genrule pour montrer la dependances</p></div></aside></section>
-<section><section id="_macro"><h2>Macro</h2><pre class="highlight listingblock"><code data-noescape class="python language-python">// //:rules.bzl
-def generate_final_txt(name, **kwargs):
-    genrule(
-        name = "%s_first" % name,
-        srcs = [
-            "//angular:README.md",
-        ],
-        outs = ["README-gcp.md"],
-        cmd = "cp $&lt; $@",
-    )
-
-    genrule(
-        name = name,
-        **kwargs
-    )</code></pre></section><section id="_macro_2"><h2>Macro</h2><pre class="highlight listingblock"><code data-noescape class="python language-python">load("//:rules.bzl", "generate_final_txt")
-
-generate_final_txt(
-    name = "concat",
-    srcs = [
-        "copy-file", "//:LICENCE",
-    ],
-    outs = ["final.txt"],
-    cmd = "cat $(locations //copy-file) $(location //some:file2) &gt; $@"
-)</code></pre></section></section>
-<section id="_custom_rules"><h2>Custom rules</h2><pre class="highlight listingblock"><code data-noescape class="python language-python">def ts_binary_impl(ctx):
-  files = list(get_transitive_files(ctx))
-  output = ctx.outputs.out
-  flags = ' '.join(ctx.attr.flags)
-  ctx.action(
-      inputs=files,
-      outputs=[output],
-      command="tsc %s --out %s %s" % (
-          flags, output.path, ' '.join([f.path for f in files])))
-
-ts_binary = rule(
-  implementation = ts_binary_impl,
-  attrs = {
-      "srcs": attr.label_list(allow_files=ts_filetype),
-      "deps": attr.label_list(allow_files=False),
-      "flags": attr.string_list(),
-  },
-  outputs = {"out": "%{name}.js"},
-)]</code></pre></section>
+    return struct(**d)</code></pre></section>
 <section><iframe src="https://giphy.com/embed/uhb1F8ebDgkzC" width="960" height="540" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 <aside class="notes"><div class="paragraph"><p>TODO:
 Manu

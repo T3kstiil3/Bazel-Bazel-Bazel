@@ -23,9 +23,9 @@ image::angular.png[]
 --
 --
 
-=== Differential loading
+// === Differential loading
 
-image::angular-build.png[]
+// image::angular-build.png[]
 
 === !
 
@@ -35,6 +35,11 @@ image::angular/angular-and-bazel.png[]
 ----
 npm run ng add @angular/bazel
 ----
+
+[.notes]
+--
+Il faut dire que c'est a ce moment la que nous avons voulu regarder Bazel et comprendre comment cela fonctionner. 
+--
 
 === !
 

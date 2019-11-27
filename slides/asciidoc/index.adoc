@@ -119,37 +119,23 @@ http_archive(
 [source,python]
 ----
 // BUILD.bazel
-genrule(
-    srcs = [ ... ],
-    outs = [ ... ],
-    cmd = " ... ",
+ts_library(
+    srcs =  [ ... ],
+    deps = [ "..." ],
 )
 ----
-
-[.notes]
---
-TODO: 
-- appeler gen_rule
---
 
 === Créer une target
 
 [source,python]
 ----
 // BUILD.bazel
-genrule(
-    name = "copy-file",
+rollup_bundle(
+    name = "bundle",
     srcs = [ ... ],
-    outs = [ ... ],
-    cmd = " ... ",
+    deps = [ "..." ],
 )
 ----
-
-[.notes]
---
-TODO: 
-- appeler gen_rule
---
 
 == Les labels
 
@@ -184,14 +170,11 @@ Si je suis dans le répertoire `gcp`
 
 [source,python]
 ---- 
-// //gcp/BUILD.bazel
-genrule(
-    name = "copy-file",
-    srcs = [
-        "//angular:README.md",
-    ],
-    outs = ["README-gcp.md"],
-    cmd = "cp $< $@",
+// //library/BUILD.bazel
+ts_library(
+    name = "library",
+    srcs = glob(["*.ts"]),
+    deps = [ "@npm//@types/react" ],
 )
 ----
 
@@ -199,49 +182,30 @@ genrule(
 
 [source,python]
 ----
-// //gcp/BUILD.bazel
-genrule(
-    name = "copy-file",
-    srcs = [
-        "//angular:README.md",
-    ],
-    outs = ["README-gcp.md"],
-    cmd = "cp $< $@",
+// //library/BUILD.bazel
+ts_library(
+    name = "library",
+    srcs = glob(["*.ts"]),
+    deps = [ "@npm//@types/react" ],
 )
 
-genrule(
-    name = "concat",
-    srcs = [
-        "copy-file", "//:LICENCE",
-    ],
-    outs = ["final.txt"],
-    cmd = "cat $(locations //copy-file) $(location //some:file2) > $@",
+// //BUILD.bazel
+ts_library(
+    name = "library",
+    srcs = glob(["*.ts"]),
+    deps = [ "//library", "@npm//@types/react" ],
 )
 ----
-
-[.notes]
---
-TODO: 
-- appeler gen_rule apres une autre genrule pour montrer la dependances
---
 
 == Macro
 
 [source,python]
 ----
 // //:rules.bzl
-def generate_final_txt(name, **kwargs):
-    genrule(
-        name = "%s_first" % name,
-        srcs = [
-            "//angular:README.md",
-        ],
-        outs = ["README-gcp.md"],
-        cmd = "cp $< $@",
-    )
-
-    genrule(
+def compile(name, **kwargs):
+    ts_library(
         name = name,
+        srcs = glob(["*.ts"]),
         **kwargs
     )
 ----
@@ -250,15 +214,11 @@ def generate_final_txt(name, **kwargs):
 
 [source,python]
 ----
-load("//:rules.bzl", "generate_final_txt")
+load("//:rules.bzl", "compile")
 
-generate_final_txt(
-    name = "concat",
-    srcs = [
-        "copy-file", "//:LICENCE",
-    ],
-    outs = ["final.txt"],
-    cmd = "cat $(locations //copy-file) $(location //some:file2) > $@"
+compile(
+    name = "library",
+    deps = [ "@npm//@types/react" ]
 )
 ----
 
@@ -286,6 +246,10 @@ ts_binary = rule(
   outputs = {"out": "%{name}.js"},
 )]
 ----
+
+== Custom rules
+
+include::chapters/starlark-file.adoc[]
 
 include::chapters/demo.adoc[]
 
