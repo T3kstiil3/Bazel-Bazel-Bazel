@@ -18,11 +18,6 @@ fizz_buzz(20)
 
 [.notes]
 --
---
-
-=== Différence avec Python
-
-[%step]
 * Les variables globales sont immutables
 * Les `for` et `if` utilisables que dans des fonctions
 * Recursion impossible
@@ -31,16 +26,20 @@ fizz_buzz(20)
 * Les `string` sont entre double quotes
 * ...
 
-
-[.notes]
---
-TODO: 
-- Mettre le contenu d'un fichier bzl. Pour montrer que c'est tres complique et que nous allons preferer utiliser des rules predefinies
 --
 
-[.hidden-title]
-=== Différence avec Python
+// === Différence avec Python
 
-[.fullscreen]
-[source,python]
-include::starlark-file.adoc[]
+// [%step]
+
+
+// [.notes]
+// --
+// --
+
+// [.hidden-title]
+// === Différence avec Python
+
+// [.fullscreen]
+// [source,python]
+// include::starlark-file.adoc[]
