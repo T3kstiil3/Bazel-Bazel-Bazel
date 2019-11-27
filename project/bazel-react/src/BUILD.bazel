@@ -1,0 +1,13 @@
+package(default_visibility = ["//visibility:public"])
+
+load("@build_bazel_rules_nodejs//:defs.bzl", "rollup_bundle")
+
+rollup_bundle(
+    name = "bundle",
+    enable_code_splitting = False,
+    entry_point = ":index.js",
+    deps = [
+        "@npm//react",
+        "@npm//react-dom",
+    ],
+)
