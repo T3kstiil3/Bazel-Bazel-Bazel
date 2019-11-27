@@ -17,6 +17,14 @@ image::angular-connect.png[]
 
 === !
 
+image::sad.gif[sad,700]
+
+[.notes]
+--
+--
+
+=== !
+
 image::angular.png[]
 
 [.notes]
