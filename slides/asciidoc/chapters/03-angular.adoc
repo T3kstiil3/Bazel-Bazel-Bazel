@@ -17,19 +17,19 @@ image::angular-connect.png[]
 
 === !
 
-image::sad.gif[sad,700]
+image::react/sad.gif[sad,700]
 
 [.notes]
 --
 --
 
-=== !
+// === !
 
-image::angular.png[]
+// image::angular.png[]
 
-[.notes]
---
---
+// [.notes]
+// --
+// --
 
 // === Differential loading
 
@@ -69,6 +69,14 @@ git diff
 ---
 
 * executer deux fois pour voir le temps d'execution
+--
+
+=== !
+
+image::react/react-pr-bazel.png[prreact,700]
+
+[.notes]
+--
 --
 
 === !
