@@ -68,7 +68,7 @@ const result = mult( sum(1, 2), 3);</code></pre>
 bazel query "deps(//packages/http)" --output graph | dot -Tpng &gt; /tmp/dep.png
 open /tmp/dep.png</p></div></aside></section></section>
 <section><section><div class="imageblock" style=""><img src="images/angular-pr.png" alt="angular pr"></div><aside class="notes"><div class="paragraph"><p>Aurel</p></div></aside></section><section><div class="imageblock" style=""><img src="images/angular-connect.png" alt="angular connect"></div>
-<aside class="notes"></aside></section><section><div class="imageblock" style=""><img src="images/angular.png" alt="angular"></div>
+<aside class="notes"></aside></section><section><div class="imageblock" style=""><img src="images/react/sad.gif" alt="sad" width="700"></div>
 <aside class="notes"></aside></section><section><div class="imageblock" style=""><img src="images/angular/angular-and-bazel.png" alt="angular and bazel"></div>
 <pre class="highlight listingblock"><code data-noescape class="shell language-shell">npm run ng add @angular/bazel</code></pre>
 <aside class="notes"><div class="paragraph"><p>Il faut dire que c&#8217;est a ce moment la que nous avons voulu regarder Bazel et comprendre comment cela fonctionner.</p></div></aside></section><section><iframe src="https://giphy.com/embed/UrEQirmnMPxBwToULv" width="960" height="540" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
@@ -81,7 +81,8 @@ git add . git commit
 ng add @angular/bazel
 git diff
 ---</p></div>
-<div class="ulist"><ul><li><p>executer deux fois pour voir le temps d&#8217;execution</p></li></ul></div></aside></section><section><div class="imageblock" style=""><img src="images/angular/ng-build-bazel.png" alt="ng build bazel"></div></section><section><div class="imageblock" style=""><img src="images/angular/ng-build-bazel-style.png" alt="ng build bazel style"></div></section></section>
+<div class="ulist"><ul><li><p>executer deux fois pour voir le temps d&#8217;execution</p></li></ul></div></aside></section><section><div class="imageblock" style=""><img src="images/react/react-pr-bazel.png" alt="prreact" width="700"></div>
+<aside class="notes"></aside></section><section><div class="imageblock" style=""><img src="images/angular/ng-build-bazel.png" alt="ng build bazel"></div></section><section><div class="imageblock" style=""><img src="images/angular/ng-build-bazel-style.png" alt="ng build bazel style"></div></section></section>
 <section><div class="admonitionblock note"><table><tr><td class="icon"><i class="fa fa-info-circle" title="Note"></i></td><td class="content">Il faut voir Bazel comme un orchestrateur, et non comme un nouvel outil de build à apprendre</td></tr></table></div>
 <aside class="notes"></aside></section>
 <section id="_multi_langage"><h2>🇫🇷 Multi Langage</h2><div class="ulist column"><ul><li><p>Android</p></li><li><p>C / C++</p></li><li><p>C#</p></li><li><p>Docker</p></li><li><p>Go</p></li><li><p>Groovy</p></li></ul></div>
