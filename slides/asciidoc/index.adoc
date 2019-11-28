@@ -120,7 +120,7 @@ http_archive(
 ----
 // BUILD.bazel
 ts_library(
-    srcs =  [ ... ],
+    srcs =  [ "..." ],
     deps = [ "..." ],
 )
 ----
@@ -132,7 +132,7 @@ ts_library(
 // BUILD.bazel
 rollup_bundle(
     name = "bundle",
-    srcs = [ ... ],
+    srcs = [ "..." ],
     deps = [ "..." ],
 )
 ----
@@ -191,7 +191,7 @@ ts_library(
 
 // //BUILD.bazel
 ts_library(
-    name = "library",
+    name = "app",
     srcs = glob(["*.ts"]),
     deps = [ "//library", "@npm//@types/react" ],
 )
