@@ -1,15 +1,14 @@
 == !
 
-image::angular-pr.png[]
+image::angular-connect.png[]
 
 [.notes]
 --
-Aurel
 --
 
 === !
 
-image::angular-connect.png[]
+image::angular-pr.png[]
 
 [.notes]
 --
