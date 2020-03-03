@@ -19,7 +19,7 @@ image::emmanuel.jpg[]
 --
 Aurélien LOYER
 
-Consultant à Zenika Lille 
+Software Engineer chez QIMA 
 
 @AurelienLoyer
 --
