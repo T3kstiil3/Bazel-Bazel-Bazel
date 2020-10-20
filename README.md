@@ -27,7 +27,6 @@ npm run build:custom
 npm run clean
 ```
 
-
 ## Liens
 
 - https://bazel.build/
